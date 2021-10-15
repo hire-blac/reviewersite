@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+{% block title %} {{ title }} {% endblock title %}
+
+{% block content %}
+  
+  <h1>Reviews Page</h1>
+  
+  {% if user.is_authenticated %}
+    <h3>Logged in as {{user}}</h3>
+  {% else %}
+    <h3>User Not logged in</h3>
+  {% endif %}
+  
+{% endblock content %}
