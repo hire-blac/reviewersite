@@ -6,15 +6,11 @@
 
   <h1>Homepage</h1>
   <h3>All Reviews</h3>
-  {% if len(reviews) > 0 %}
-
-    {% for review in reviews %}
-      <h4>
-        <a href="/reviews/{{review.id}}">{{review}}</a>
-      </h4>
-    {% endfor %}
-  {% else %}
-    <p>Create new review <a href="/reviews/new">here</a></p>
-  {% endif %}
+  
+  {% for review in reviews %}
+    <h4>
+      <a href="/reviews/{{review.id}}">{{review}}</a>
+    </h4>
+  {% endfor %}
 
 {% endblock content %}
