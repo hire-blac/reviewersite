@@ -17,3 +17,9 @@ nav ul li {
 nav a {
   text-decoration: none;
 }
+.content {
+  width: 800px;
+  margin: 20px auto;
+  padding: 0 20px;
+  border: solid 1px #ccc;
+}

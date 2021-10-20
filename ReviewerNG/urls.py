@@ -1,4 +1,4 @@
-"""reviewerSite URL Configuration
+"""ReviewerNG URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from register import views as v
+import register
 
 urlpatterns = [
     path('', include('reviewer.urls')),
     path('register/', v.register, name='register'),
-    path('admin/', admin.site.urls),
     path('', include('django.contrib.auth.urls')),
+    path('admin/', admin.site.urls),
 ]

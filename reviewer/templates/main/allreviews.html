@@ -4,12 +4,12 @@
 
 {% block content %}
 
-  <h1>Homepage</h1>
-  <h3>All Reviews</h3>
+  <h1>Reviews Page</h1>
+  
   {% for review in reviews %}
-    <h4>
+    <h3>
       <a href="/reviews/{{review.id}}">{{review}}</a>
-    </h4>
+    </h3>
   {% endfor %}
 
 {% endblock content %}

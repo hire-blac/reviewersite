@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+{% block title %}My Reviews{% endblock title %}
+
+{% block content %}
+
+  {% if user.is_authenticated %}
+
+    {% for review in user.review.all %}
+      <p><a href="/{{review.id}}">{{review.name}}</a></p>
+    {% endfor %}
+    
+  {% else %}
+    <p>Log in <a href="/login">here</a></p>
+  {% endif %}
+
+{% endblock content %}

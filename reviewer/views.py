@@ -1,18 +1,19 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import redirect, render
 from reviewer.forms import CreateNewReview
-from reviewer.models import Review
+from .models import Review
 
 # Create your views here.
 def index(response):
-    print(response)
-    return render(response, "main/index.html", {"title": "Homepage"})
+    reviews = Review.objects.all()
+    return render(response, 'main/index.html', {'title': 'Homepage', 'reviews':reviews})
+
+def review(response, id):
+    review = Review.objects.get(id=id)
+    return render(response, 'main/review.html', {'title': 'Review', 'review':review})
 
 def reviews(response):
-    # reviews = Review.objects.get()
-    # for review in reviews:
-    #     print(review)
-    return render(response, "main/reviews.html", {"title": "Reviews" })
+    reviews = Review.objects.all()
+    return render(response, 'main/allreviews.html', {'title': 'Reviews', 'reviews':reviews})
 
 def new_review(response):
     if response.method == "POST":
@@ -23,11 +24,16 @@ def new_review(response):
             print(rev['product'])
             review = Review(
                 product=rev['product'],
-                stars=rev['stars'],
+                rating=rev['rating'],
                 review=rev['review'])
             review.save()
+            response.user.review.add(review)
+            return redirect('my_reviews')
     else:    
         form = CreateNewReview
+    
+    return render(response, 'main/newreview.html', {'title':'New Review', 'form':form})
 
-    return render(response, "main/new_review.html", 
-                    {"title": "New Review", "form": form})
+def my_reviews(response):
+	return render(response, 'main/myreviews.html', {})
+	

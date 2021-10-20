@@ -7,45 +7,48 @@
   <title>{% block title %}{{title}}{% endblock title %}</title>
 
   {% load static %}
-  <link rel="stylesheet" type="text/css" href="{% static 'reviewer/style.css' %}">
-  
+  <link rel="stylesheet" href="{% static 'reviewer/style.css' %}">
+
 </head>
 <body>
   <nav>
-    <a href="/">
-      <h1>Homepage</h1>
-    </a>
+    <h1>
+      <a href="/">Homepage</a>
+    </h1>
     <ul>
-      <li>
-        <a href="/reviews">Reviews</a>
-      </li>
       {% if user.is_authenticated %}
         <li>
-          <a href="/reviews/new">New Review</a>
+          <a href="/myreviews">My Reviews</a>
         </li>
         <li>
-          <a href="/reviews/:id">My Reviews</a>
+          <a href="/reviews/new">New Review</a>
         </li>
         <li>
           <a href="/logout">logout</a>
         </li>
       {% else %}
         <li>
-        <a href="/login">Login</a>
+          <a href="/reviews">Reviews</a>
+        </li>
+        <li>
+          <a href="/login">Login</a>
         </li>
         <li>
           <a href="/register">Sign up</a>
         </li>
       {% endif %}
-      
     </ul>
   </nav>
-
   <div class="content">
+    {% if user.is_authenticated %}
+      <p>User {{user.id}} {{user.username}} is logged in</p>
+    {% else %}No user logged in</p>
+    {% endif %}
     {% block content %}
-    
-    {% endblock content %}
-  </div>
 
+    {% endblock content %}
+    
+  </div>
+  
 </body>
 </html>

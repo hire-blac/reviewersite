@@ -1,16 +1,17 @@
 {% extends 'main/base.html' %}
-{% block title %}User Login{% endblock title %}
-
+{% block title %}
+  Login
+{% endblock title %}
 {% block content %}
-
-  <h1>Login existing user</h1>
-
-  <form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-
-    <button type="submit">Login</button>
-    <p>Dont have an account? <a href="/register">Sign up here</a></p>
-  </form>
-
+  {% if user.is_authenticated %}
+    <p>User already logged in</p>
+    <p>Go to <a href="/">homepage</a></p>
+  {% else %}
+    <form action="" method="post" >
+      {% csrf_token %}
+      {{form.as_p}}
+      <p>Don't have an account? Register <a href="/register">here</a></p>
+      <button type="submit">login</button>
+    </form>
+  {% endif %}
 {% endblock content %}
