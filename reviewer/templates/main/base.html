@@ -23,7 +23,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-        
+
         {% if user.is_authenticated %}
 
           <li class="nav-item">
@@ -54,7 +54,7 @@
       </div>
     </div>
   </nav>
-
+<!--
   <nav>
     <h1>
       <a href="/">Homepage</a>
@@ -83,6 +83,8 @@
       {% endif %}
     </ul>
   </nav>
+
+-->
   <div class="content">
     {% if user.is_authenticated %}
       <p>User {{user.id}} {{user.username}} is logged in</p>
