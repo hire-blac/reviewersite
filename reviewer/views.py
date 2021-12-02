@@ -40,7 +40,7 @@ def new_review(response):
                 review=rev['review'])
             review.save()
             response.user.review.add(review)
-            return redirect('myreviews')
+            return redirect('index')
     else:    
         form = CreateNewReview
     

@@ -14,6 +14,7 @@ def register(response):
 			password = form.cleaned_data['password1']
 			user = authenticate(username=username, password=password)
 			login(response, user)
+			print(user)
 			return redirect('/')
 	else:
 		form = RegisterForm()
