@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+  <h1>My Profile</h1>
+  <h1>User {{profile.user.username}} Profile Page</h1>
+
+  <h3>My Reviews</h3>
+
+  {% for review in reviews %}
+    <h2><a href="/reviews/{{review.id}}">{{review.product}}</a></h2>
+    <small>
+      <p><a href="">edit review</a></p>
+      <p><a href="">delete review</a></p>
+    </small>
+  {% endfor %}
+
+{% endblock content %}

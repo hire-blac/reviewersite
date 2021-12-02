@@ -5,8 +5,12 @@
 
   {% if user.is_authenticated %}
 
-    {% for review in user.review.all %}
-      <p><a href="/{{review.id}}">{{review.name}}</a></p>
+    {% for review in reviews %}
+      <h2><a href="/reviews/{{review.id}}">{{review.product}}</a></h2>
+      <small>
+        <p><a href="">edit review</a></p>
+        <p><a href="">delete review</a></p>
+      </small>
     {% endfor %}
     
   {% else %}

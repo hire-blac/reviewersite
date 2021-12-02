@@ -3,8 +3,9 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    # path('reviews', views.reviews, name='reviews'),
     path('reviews/<int:id>', views.review, name='review'),
-    path('reviews', views.reviews, name='reviews'),
-    path('myreviews', views.my_reviews, name='myreviews'),
+    path('profile', views.profile, name='profile'),
     path('reviews/new', views.new_review, name='new_review'),
+    path('finduser', views.find_user, name='find_user'),
 ]

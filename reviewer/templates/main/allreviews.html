@@ -7,9 +7,17 @@
   <h1>Reviews Page</h1>
   
   {% for review in reviews %}
-    <h3>
-      <a href="/reviews/{{review.id}}">{{review}}</a>
-    </h3>
+    <div>
+      <h4 style="margin-bottom: 5px">
+        <a href="/reviews/{{review.id}}">{{review}}</a>
+      </h4>
+      <div class="review-links">
+        <small>
+          <p><a href="">upvote</a> | <a href="">downvote</a></p>
+          <p>Written by <a href="">{{review.user}}</a></p>
+        </small>
+      </div>
+    </div>
   {% endfor %}
 
 {% endblock content %}

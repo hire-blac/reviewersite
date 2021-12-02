@@ -3,13 +3,20 @@
 {% block title %}{{title}}{% endblock title %}
 
 {% block content %}
+  {% if anotheruser %}
+    <h1>Your Profile</h1>
+    <h1>User {{anotheruser.username}} Page</h1>
 
-  <h1>User Reviews Page</h1>
-  
-  {% for review in reviews %}
-    <h3>
-      <a href="/reviews/{{review.id}}">{{review}}</a>
-    </h3>
-  {% endfor %}
+    <h3>Your Reviews</h3>
+    
+    {% for review in reviews %}
+      <h3>
+        <a href="/reviews/{{review.id}}">{{review}}</a>
+      </h3>
+    {% endfor %}
+
+  {% else %}
+    <h1>{{message}}</h1>
+  {% endif %}  
 
 {% endblock content %}

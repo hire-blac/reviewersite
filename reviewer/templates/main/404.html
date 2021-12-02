@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+
+  {% if message %}
+    <h1>{{message}}</h1>
+  {% else %}
+    <h1>page not found</h1>
+  {% endif %}
+
+{% endblock content %}
