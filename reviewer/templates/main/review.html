@@ -9,5 +9,22 @@
   <h3>Rating: {{review.rating}} Stars</h3>
   <small>Written by {{review.user.username}}</small>
   <p>{{review.review}}</p>
+  <form action="{% url 'upvote' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="review_id" value="{{review.id}}">
+    {% if user not in review.upvote.all %}
+      <button>upvote</button>
+    {% endif %}
+  </form>
+  <strong>{{review.num_upvotes}} upvotes</strong>
+  
+  <form action="{% url 'downvote' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="review_id" value="{{review.id}}">
+    {% if user not in review.downvote.all %}
+      <button>downvote</button>
+    {% endif %}
+  </form>
+  <strong>{{review.num_upvotes}} downvotes</strong>
 
 {% endblock content %}

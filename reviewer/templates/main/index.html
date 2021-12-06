@@ -13,8 +13,24 @@
         <a href="/reviews/{{review.id}}">{{review}}</a>
       </h4>
       <div class="review-links">
+        <form action="{% url 'upvote' %}" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="review_id" value="{{review.id}}">
+          {% if user not in review.upvote.all %}
+            <button>upvote</button>
+          {% endif %}
+        </form>
+        <strong>{{review.num_upvotes}} upvotes</strong>
+        
+        <form action="{% url 'downvote' %}" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="review_id" value="{{review.id}}">
+          {% if user not in review.downvote.all %}
+            <button>downvote</button>
+          {% endif %}
+        </form>
+        <strong>{{review.num_upvotes}} downvotes</strong>
         <small>
-          <p><a href="">upvote</a> | <a href="">downvote</a></p>
           <p>Written by <a href="">{{review.user}}</a></p>
         </small>
       </div>

@@ -8,4 +8,6 @@ urlpatterns = [
     path('profile', views.profile, name='profile'),
     path('reviews/new', views.new_review, name='new_review'),
     path('finduser', views.find_user, name='find_user'),
+    path('upvote', views.upvote, name='upvote'),
+    path('downvote', views.downvote, name='downvote'),
 ]

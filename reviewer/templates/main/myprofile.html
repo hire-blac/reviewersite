@@ -10,6 +10,8 @@
 
   {% for review in reviews %}
     <h2><a href="/reviews/{{review.id}}">{{review.product}}</a></h2>
+        <strong>{{review.num_upvotes}} upvotes</strong>
+        <strong>{{review.num_upvotes}} downvotes</strong>
     <small>
       <p><a href="">edit review</a></p>
       <p><a href="">delete review</a></p>

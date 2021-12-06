@@ -28,7 +28,11 @@ def review(response, id):
     return render(response, 'main/review.html', context )
 
 # upvote a review
-def upvote_review(response):
+def upvote(response):
+    return redirect('index')
+
+# downvote a review
+def downvote(response):
     return redirect('index')
 
 # find user
