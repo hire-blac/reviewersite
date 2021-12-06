@@ -6,14 +6,32 @@ from reviewer.forms import CreateNewReview
 from .models import Profile, Review
 
 # Create your views here.
+
+# homepage
 def index(response):
     reviews = Review.objects.all()
-    return render(response, 'main/index.html', {'title': 'Homepage', 'reviews':reviews})
+    user = response.user
+    context = {
+        'title': 'Homepage',
+        'reviews':reviews,
+        'user': user
+        }
+    return render(response, 'main/index.html', context )
 
+# single review
 def review(response, id):
     review = Review.objects.get(id=id)
-    return render(response, 'main/review.html', {'title': 'Review', 'review':review})
+    context = {
+        'title': 'Review',
+        'review':review
+        }
+    return render(response, 'main/review.html', context )
 
+# upvote a review
+def upvote_review(response):
+    return redirect('index')
+
+# find user
 def find_user(response):
     if response.method == "POST":
         form = response.POST
@@ -25,6 +43,7 @@ def find_user(response):
 #     reviews = Review.objects.all()
 #     return render(response, 'main/allreviews.html', {'title': 'Reviews', 'reviews':reviews})
 
+# create a new review
 @login_required(login_url='/login/')
 def new_review(response):
  
@@ -43,11 +62,20 @@ def new_review(response):
             return redirect('index')
     else:    
         form = CreateNewReview
-    
-    return render(response, 'main/newreview.html', {'title':'New Review', 'form':form})
+    context = {
+        'title':'New Review',
+        'form':form
+        }
+    return render(response, 'main/newreview.html', context )
 
+# view profile page
 @login_required(login_url='/login/')
 def profile(response):
     my_profile = response.user.profile
     reviews = response.user.review.all()
-    return render(response, 'main/myprofile.html', {'title':'My Profile', 'profile':my_profile, 'reviews': reviews })
+    context = {
+        'title':'My Profile',
+        'profile':my_profile,
+        'reviews': reviews
+        }
+    return render(response, 'main/myprofile.html', context )

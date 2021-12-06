@@ -10,9 +10,34 @@ class Review(models.Model):
     product = models.CharField(max_length=200)
     rating = models.IntegerField()
     review = models.CharField(max_length=200)
+    upvote = models.ManyToManyField(User, default=None, blank=True, related_name='upvote')
+    downvote = models.ManyToManyField(User, default=None, blank=True, related_name='downvote')
 
     def __str__(self):
         return self.product
+
+    @property
+    def num_upvotes(self):
+        return self.upvote.all().count()
+
+    @property
+    def num_downvotes(self):
+        return self.downvote.all().count()
+
+
+VOTE_CHOICES = {
+    ('Upvote', 'Upvote'),
+    ('Downvote', 'Downvote')
+}
+
+class Vote(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    value = models.CharField(choices=VOTE_CHOICES, default='LIKE', max_length=10)
+    
+    def __str__(self):
+        return self.review
+    
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -20,14 +45,16 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
     profile_pic = models.ImageField(null=True, blank=True)
-    followers = models.ManyToManyField(User, related_name="followers")
+    followers = models.ManyToManyField(User, default=None, related_name="followers")
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
+    # create user profile after user has been created
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
             Profile.objects.create(user=instance)
     
+    # save user profile
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
