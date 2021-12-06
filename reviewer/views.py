@@ -28,10 +28,12 @@ def review(response, id):
     return render(response, 'main/review.html', context )
 
 # upvote a review
+@login_required(login_url='/login/')
 def upvote(response):
     return redirect('index')
 
 # downvote a review
+@login_required(login_url='/login/')
 def downvote(response):
     return redirect('index')
 
