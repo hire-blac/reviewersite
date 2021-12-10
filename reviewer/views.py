@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from reviewer.forms import CreateNewReview
-from .models import Profile, Review
+from .models import Profile, Review, Vote
 
 # Create your views here.
 
@@ -27,14 +27,55 @@ def review(response, id):
         }
     return render(response, 'main/review.html', context )
 
-# upvote a review
+# # upvote a review
 @login_required(login_url='/login/')
 def upvote(response):
+    user = response.user
+    if response.method == 'POST':
+        review_id = response.POST.get('review_id')
+        review = Review.objects.get(id=review_id)
+        print(user)
+        if user not in review.upvotes.all():
+            if user in review.downvotes.all():
+                review.downvotes.remove(user)
+
+            review.upvotes.add(user)
+            print(review.upvotes)
+
+        vote, created = Vote.objects.get_or_create(user=user, review=review)
+
+        if not created:
+            if vote.value == 'Downvote':
+                vote.value = 'Upvote'
+        else:
+            vote.value = 'Upvote'
+        vote.save()
+
+    print('Liked')
     return redirect('index')
 
 # downvote a review
 @login_required(login_url='/login/')
 def downvote(response):
+    user = response.user
+    if response.method == 'POST':
+        review_id = response.POST.get('review_id')
+        review = Review.objects.get(id=review_id)
+        if user not in review.downvotes.all():
+            if user in review.upvotes.all():
+                review.upvotes.remove(user)
+            review.downvotes.add(user)
+        
+        vote, created = Vote.objects.get_or_create(user=user, review=review)
+
+        if not created:
+            if vote.value == 'Upvote':
+                vote.value = 'Downvote'
+        else:
+            vote.value = 'Downvote'
+        vote.save()
+        
+    print('Unliked')
     return redirect('index')
 
 # find user

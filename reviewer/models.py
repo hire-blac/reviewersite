@@ -10,19 +10,19 @@ class Review(models.Model):
     product = models.CharField(max_length=200)
     rating = models.IntegerField()
     review = models.CharField(max_length=200)
-    upvote = models.ManyToManyField(User, default=None, blank=True, related_name='upvote')
-    downvote = models.ManyToManyField(User, default=None, blank=True, related_name='downvote')
+    upvotes = models.ManyToManyField(User, default=None, blank=True, related_name='upvote')
+    downvotes = models.ManyToManyField(User, default=None, blank=True, related_name='downvote')
 
     def __str__(self):
         return self.product
 
     @property
     def num_upvotes(self):
-        return self.upvote.all().count()
+        return self.upvotes.all().count()
 
     @property
     def num_downvotes(self):
-        return self.downvote.all().count()
+        return self.downvotes.all().count()
 
 
 VOTE_CHOICES = {
@@ -33,10 +33,10 @@ VOTE_CHOICES = {
 class Vote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     review = models.ForeignKey(Review, on_delete=models.CASCADE)
-    value = models.CharField(choices=VOTE_CHOICES, default='LIKE', max_length=10)
+    value = models.CharField(choices=VOTE_CHOICES, max_length=10)
     
     def __str__(self):
-        return self.review
+        return str(self.review) 
     
 
 class Profile(models.Model):

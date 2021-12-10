@@ -16,7 +16,7 @@
         <form action="{% url 'upvote' %}" method="POST">
           {% csrf_token %}
           <input type="hidden" name="review_id" value="{{review.id}}">
-          {% if user not in review.upvote.all %}
+          {% if user not in review.upvotes.all %} 
             <button>upvote</button>
           {% endif %}
         </form>
@@ -25,11 +25,11 @@
         <form action="{% url 'downvote' %}" method="POST">
           {% csrf_token %}
           <input type="hidden" name="review_id" value="{{review.id}}">
-          {% if user not in review.downvote.all %}
+          {% if user not in review.downvotes.all %}
             <button>downvote</button>
           {% endif %}
         </form>
-        <strong>{{review.num_upvotes}} downvotes</strong>
+        <strong>{{review.num_downvotes}} downvotes</strong>
         <small>
           <p>Written by <a href="">{{review.user}}</a></p>
         </small>
