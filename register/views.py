@@ -34,7 +34,11 @@ def user_login(response):
 				login(response, user)
 				return redirect('/')
 			else:
-				return render(response, 'main/404.html', {'title':'No Such User', 'message':'No such user'})
+				context = {
+					'title':'No Such User',
+					'message':'No such user. Please signup'
+					}
+				return render(response, 'main/404.html', context)
 	else:
 		form = Login_Form()
 			
