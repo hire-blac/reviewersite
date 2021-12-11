@@ -25,21 +25,21 @@
         <ul class="navbar-nav bg-light">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Categories
+              categories
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Category1</a></li>
-              <li><a class="dropdown-item" href="#">Category2</a></li>
-              <li><a class="dropdown-item" href="#">Category3</a></li>
+              <li><a class="dropdown-item" href="#">category1</a></li>
+              <li><a class="dropdown-item" href="#">category2</a></li>
+              <li><a class="dropdown-item" href="#">category3</a></li>
             </ul>
           </li>
         {% if user.is_authenticated %}
 
           <li class="nav-item">
-            <a class="nav-link" href="/profile">My Profile</a>
+            <a class="nav-link" href="/profile">my profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/reviews/new">New Review</a>
+            <a class="nav-link" href="/reviews/new">new review</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/logout">logout</a>
@@ -48,10 +48,10 @@
         {% else %}
 
           <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/login">login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/register">Sign up</a>
+            <a class="nav-link" href="/register">sign up</a>
           </li>
 
         {% endif %}
