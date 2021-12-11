@@ -14,20 +14,29 @@
 
 </head>
 <body>
-{% comment %} 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <nav class="navbar navbar-expand-lg mb navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">Homepage</a>
+      <a class="navbar-brand" href="/"><h3>reviewer</h3></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav bg-light">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Categories
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Category1</a></li>
+              <li><a class="dropdown-item" href="#">Category2</a></li>
+              <li><a class="dropdown-item" href="#">Category3</a></li>
+            </ul>
+          </li>
         {% if user.is_authenticated %}
 
           <li class="nav-item">
-            <a class="nav-link" href="/myreviews">My Reviews</a>
+            <a class="nav-link" href="/profile">My Profile</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/reviews/new">New Review</a>
@@ -38,9 +47,6 @@
 
         {% else %}
 
-          <li class="nav-item">
-            <a class="nav-link" href="/reviews">Reviews</a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" href="/login">Login</a>
           </li>
@@ -53,37 +59,6 @@
         </ul>
       </div>
     </div>
-  </nav> {% endcomment %}
-
-  <nav>
-    <h1>
-      <a href="/">reviewer</a>
-    </h1>
-    <form action="/finduser" method='post'>
-      {% csrf_token %}
-      <input type="text" name="username" placeholder="Search for user">
-      <button type="submit">search</button>
-    </form>
-    <ul>
-      {% if user.is_authenticated %}
-        <li>
-          <a href="/profile">My Profile</a>
-        </li>
-        <li>
-          <a href="/reviews/new">New Review</a>
-        </li>
-        <li>
-          <a href="/logout">logout</a>
-        </li>
-      {% else %}
-        <li>
-          <a href="/login">Login</a>
-        </li>
-        <li>
-          <a href="/register">Sign up</a>
-        </li>
-      {% endif %}
-    </ul>
   </nav>
 
   <div class="content">

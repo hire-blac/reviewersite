@@ -44,7 +44,7 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=200, null=True)
     last_name = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
-    profile_pic = models.ImageField(null=True, blank=True)
+    profile_pic = models.ImageField(default="profile_pic.png", null=True, blank=True)
     followers = models.ManyToManyField(User, default=None, related_name="followers")
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
