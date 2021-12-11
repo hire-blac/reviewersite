@@ -38,9 +38,9 @@ def upvote(response):
         if user not in review.upvotes.all():
             if user in review.downvotes.all():
                 review.downvotes.remove(user)
-
             review.upvotes.add(user)
-            print(review.upvotes)
+        else:
+            review.upvotes.remove(user)
 
         vote, created = Vote.objects.get_or_create(user=user, review=review)
 
@@ -65,6 +65,8 @@ def downvote(response):
             if user in review.upvotes.all():
                 review.upvotes.remove(user)
             review.downvotes.add(user)
+        else:
+            review.downvotes.remove(user)
         
         vote, created = Vote.objects.get_or_create(user=user, review=review)
 

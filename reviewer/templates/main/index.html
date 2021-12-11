@@ -18,6 +18,8 @@
           <input type="hidden" name="review_id" value="{{review.id}}">
           {% if user not in review.upvotes.all %} 
             <button>upvote</button>
+          {% else %}
+            <button>un-vote</button>
           {% endif %}
         </form>
         <strong>{{review.num_upvotes}} upvotes</strong>
@@ -27,6 +29,8 @@
           <input type="hidden" name="review_id" value="{{review.id}}">
           {% if user not in review.downvotes.all %}
             <button>downvote</button>
+          {% else %}
+            <button>un-vote</button>
           {% endif %}
         </form>
         <strong>{{review.num_downvotes}} downvotes</strong>
