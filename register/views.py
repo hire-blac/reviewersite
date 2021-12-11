@@ -36,7 +36,7 @@ def user_login(response):
 			else:
 				context = {
 					'title':'No Such User',
-					'message':'No such user. Please signup'
+					'message':'Invalid login credentials.'
 					}
 				return render(response, 'main/404.html', context)
 	else:
