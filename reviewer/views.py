@@ -93,7 +93,7 @@ def find_user(response):
 #     return render(response, 'main/allreviews.html', {'title': 'Reviews', 'reviews':reviews})
 
 # create a new review
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def new_review(response):
  
     if response.method == "POST":
