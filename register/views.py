@@ -34,6 +34,7 @@ def user_login(response):
 				login(response, user)
 				return redirect('/')
 			else:
+				response.session.set_expiry(1800)
 				context = {
 					'title':'No Such User',
 					'message':'Invalid login credentials.'

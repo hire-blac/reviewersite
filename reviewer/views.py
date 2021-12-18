@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from reviewer.forms import CreateNewReview
-from .models import Profile, Review, Vote
+from .models import Category, Profile, Review, Vote
 
 # Create your views here.
 
@@ -93,7 +93,6 @@ def find_user(response):
 #     return render(response, 'main/allreviews.html', {'title': 'Reviews', 'reviews':reviews})
 
 # create a new review
-# @login_required(login_url='/login/')
 def new_review(response):
  
     if response.method == "POST":
@@ -103,6 +102,7 @@ def new_review(response):
             rev = form.cleaned_data
             review = Review(
                 user=response.user,
+                category=rev['category'],
                 product=rev['product'],
                 rating=rev['rating'],
                 review=rev['review'])
@@ -111,9 +111,11 @@ def new_review(response):
             return redirect('index')
     else:    
         form = CreateNewReview
+        categories = Category.objects.all()
     context = {
         'title':'New Review',
-        'form':form
+        'form':form,
+        'categories': categories
         }
     return render(response, 'main/newreview.html', context )
 

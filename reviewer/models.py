@@ -5,8 +5,16 @@ from django.db.models.signals import post_save
 
 # Create your models here.
 
+class Category(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+    
+
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="review", null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     product = models.CharField(max_length=200)
     rating = models.IntegerField()
     review = models.CharField(max_length=200)
