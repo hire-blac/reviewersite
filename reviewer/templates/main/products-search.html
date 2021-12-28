@@ -1,0 +1,16 @@
+<div class="row">
+  {# icon and search-box #}
+  <div class="col-6 align-left">
+    <input 
+      placeholder="search product"
+      id="user-input"
+      onFocus=search(this)
+    >
+    <i id="search-icon" class="bi bi-search m-2"></i>
+
+    {# product-list section #}
+    <div id="user-input-replacable-content" class="col-md-8">
+      {% include 'main/products-results-partial.html' %}
+    </div>
+  </div>
+</div>

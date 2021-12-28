@@ -1,9 +1,10 @@
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from reviewer.forms import CreateNewReview
-from .models import Category, Profile, Review, Vote
+from .models import Category, Product, Profile, Review, Vote
 
 # Create your views here.
 
@@ -17,6 +18,42 @@ def index(response):
         'user': user
         }
     return render(response, 'main/index.html', context )
+
+# products
+def products(response):
+    url_parameter = response.GET.get("q")
+
+    if url_parameter:
+        products = Product.objects.filter(name__icontains=url_parameter)
+    else:
+        products = 1
+
+    context = {
+        'products':products
+    }
+
+    if response.is_ajax():
+        html = render_to_string(
+            template_name='main/products-results-partial.html',
+            context={ "products": products }
+        )
+
+        data_dict = { "html_from_view": html }
+
+        return JsonResponse(data=data_dict, safe=False)
+
+    return render(response, 'main/products.html', context)
+
+# product details
+def products_details(response, id):
+    product = Product.objects.get(id=id)
+    reviews = Review.objects.filter(product=id)
+    context = {
+        'title': 'Product Details',
+        'product': product,
+        'reviews': reviews
+        }
+    return render(response, 'main/product-details.html', context )
 
 # single review
 def review(response, id):
@@ -41,6 +78,7 @@ def upvote(response):
             review.upvotes.add(user)
         else:
             review.upvotes.remove(user)
+            
 
         vote, created = Vote.objects.get_or_create(user=user, review=review)
 

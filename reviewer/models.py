@@ -1,7 +1,8 @@
+from django import dispatch
 from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import pre_save, post_save
 
 # Create your models here.
 
@@ -12,15 +13,24 @@ class Category(models.Model):
         return self.name
     
 
-class Review(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="review", null=True)
+class Product(models.Model):
+    name = models.CharField(max_length=200)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
-    product = models.CharField(max_length=200)
+    description = models.CharField(max_length=255, null=True, blank=True)
+    
+    def __str__(self):
+        return self.name
+
+
+class Review(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="review", null=True)
+    product = models.ForeignKey(Product, null=True, on_delete=models.CASCADE)
     rating = models.IntegerField()
     review = models.CharField(max_length=200)
     upvotes = models.ManyToManyField(User, default=None, blank=True, related_name='upvote')
     downvotes = models.ManyToManyField(User, default=None, blank=True, related_name='downvote')
-
+    
     def __str__(self):
         return self.product
 
@@ -31,7 +41,7 @@ class Review(models.Model):
     @property
     def num_downvotes(self):
         return self.downvotes.all().count()
-
+    
 
 VOTE_CHOICES = {
     ('Upvote', 'Upvote'),

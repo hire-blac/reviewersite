@@ -1,0 +1,39 @@
+<div class="border mt-4 p-3">
+  <h4 style="margin-bottom: 5px">
+    <a href="/reviews/{{review.id}}">{{review}}</a>
+  </h4>
+  <div class="review-links">
+    <form action="{% url 'upvote' %}" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="review_id" value="{{review.id}}">
+      {% if user not in review.upvotes.all %} 
+        <button class="border-0 bg-transparent">
+          <i class="bi bi-arrow-up-circle"></i> upvote
+        </button>
+      {% else %}
+      <button class="border-0 bg-transparent">
+        <i class="bi bi-x-circle"></i> un-vote
+      </button>
+      {% endif %}
+      <strong>{{review.num_upvotes}} upvotes</strong>
+    </form>
+    
+    <form action="{% url 'downvote' %}" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="review_id" value="{{review.id}}">
+      {% if user not in review.downvotes.all %}
+      <button class="border-0 bg-transparent">
+        <i class="bi bi-arrow-down-circle"></i> downvote
+      </button>
+      {% else %}
+        <button class="border-0 bg-transparent">
+          <i class="bi bi-x-circle"></i> un-vote
+        </button>
+      {% endif %}
+      <strong>{{review.num_downvotes}} downvotes</strong>
+    </form>
+    <small>
+      <p>Written by <a href="">{{review.user}}</a></p>
+    </small>
+  </div>
+</div>

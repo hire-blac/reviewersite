@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+
+  <h1>Product Details</h1>
+  <h3>{{product.name}}</h3>
+  <p>{{product.category}}</p>
+  <a href="">Write a review</a>
+  <h3>Reviews</h3>
+  {% if reviews %}
+    {% for review in reviews %}
+      {% include 'main/review-link.html' %}
+    {% endfor %}
+  {% else %}
+    <p>No reviews for {{product.name}}</p>
+  {% endif %}
+
+{% endblock content %}

@@ -4,13 +4,14 @@
 
 {% block content %}
 
-  <h1>Create New Review</h1>
-
-  <form action="" method='post'>
+  <h1>Write a review</h1>
+  
+  <form class="p-3" action="" method='post'>
     {% csrf_token %}
     {% if categories %}
       <label>Category:</label>
       <select name="category">
+        
         {% for cat in categories %}
           <option value="{{cat.name}}">{{cat.name}}</option>
         {% endfor %}

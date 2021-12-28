@@ -7,35 +7,21 @@
   <title>{% block title %}{{title}}{% endblock title %}</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
   {% load static %}
-  <link rel="stylesheet" href="{% static 'reviewer/style.css' %}">
+  <link rel="stylesheet" href="{% static 'reviewer/css/style.css' %}">
 
 </head>
 <body>
 
   <nav class="navbar navbar-expand-lg mb navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/"><h3>reviewer</h3></a>
+      <a class="navbar-brand border" href="/"><h3>reviewer</h3></a>
       <button class="navbar-toggler border-0 " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        
-        <form class="d-flex input-group w-auto">
-          <input
-            type="search"
-            class="form-control rounded"
-            placeholder="Search for product or category"
-            aria-label="Search"
-            aria-describedby="search-addon"
-          />
-          <button class="input-group-text border-0 bg-transparent" id="search-addon">
-            <i class="bi bi-search"></i>
-          </button>
-        </form>
+      <div class="collapse navbar-collapse justify-content-between border" id="navbarNav">
         
         <ul class="navbar-nav bg-light">
           <li class="nav-item dropdown">
@@ -72,16 +58,30 @@
         {% endif %}
 
         </ul>
+        <div class="search-bar">
+          <input 
+            placeholder="search product"
+            id="nav-search"
+            onFocus=search(this)
+            >
+          <i id="search-icon" class="bi bi-search m-2"></i>
+        </div>
       </div>
     </div>
   </nav>
 
-  <div class="content">
+  {# product-list section #}
+  <div id="nav-search-replacable-content" class="content border-0 col-12">
+    {% include 'main/products-results-partial.html' %}
+  </div>
+  
+  <div class="content p-3">
     {% if user.is_authenticated %}
       <p>User {{user.id}} {{user.username}} is logged in</p>
     {% else %}
       <p>No user logged in</p>
     {% endif %}
+
     {% block content %}
 
     {% endblock content %}
@@ -89,4 +89,14 @@
   </div>
   
 </body>
+{% block footer %}
+  {# Bootstrap js CDN #}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    {# JQuery CDN #}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    {# Local js #}
+  <script src="{% static 'reviewer/js/script.js' %}"></script>
+{% endblock footer %}
 </html>

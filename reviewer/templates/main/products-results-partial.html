@@ -1,0 +1,17 @@
+{% if products %}
+  {% if products == 1 %}
+  
+  {% else %}
+    <ul class="list-unstyled border">
+      {% for product in products %}
+        <li class="p-2 border-bottom ">
+          <a href="/products/{{product.id}}">{{product}}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  
+{% else %}
+  <p>No product found</p>
+  <p>Add new product <a href="">here</a>.</p>
+{% endif %}
