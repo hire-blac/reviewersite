@@ -172,7 +172,6 @@ def find_user(response):
 def new_review(response):
     if response.method == "POST":
         form = CreateNewReview(response.POST)
-        print(form)
 
         if form.is_valid():
             rev = form.cleaned_data
