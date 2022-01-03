@@ -77,11 +77,11 @@
   </nav>
 
   {# product-list section #}
-  <div id="nav-search-replacable-content" class="content border-0 col-12">
+  <div id="nav-search-replacable-content" class="border-0 col-12">
     {% include 'main/products-results-partial.html' %}
   </div>
   
-  <div class="content p-3">
+  <div class="p-3">
     {% if user.is_authenticated %}
       <p>User {{user.id}} {{user.username}} is logged in</p>
     {% else %}
