@@ -12,4 +12,6 @@ urlpatterns = [
     path('downvote', views.downvote, name='downvote'),
     path('products/', views.products, name='products'),
     path('products/<int:id>', views.products_details, name='products_details'),
+    path('products/new', views.new_product, name='new_product'),
+
 ]

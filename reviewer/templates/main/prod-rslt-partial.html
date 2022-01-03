@@ -4,13 +4,11 @@
   {% if products == 1 %}
   
   {% else %}
-    <ul class="list-unstyled border">
+    <datalist id="productList">
       {% for product in products %}
-        <li class="p-2 border-bottom ">
-          <a href="/products/{{product.id}}">{{product}}</a>
-        </li>
+        <h1><option value="{{product.name}}"></h1>
       {% endfor %}
-    </ul>
+    </datalist >
   {% endif %}
 
 {% else %}

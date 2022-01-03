@@ -1,0 +1,19 @@
+<div class="row">
+  {# icon and search-box #}
+  <div class="col-6 align-left mb-3">
+    <input 
+      type="search"
+      placeholder="search for any product"
+      name="product"
+      id="user-form-input"
+      list="productList"
+      onFocus=search(this)
+    >
+    <i id="search-icon" class="bi bi-search m-2"></i>
+
+    {# product-list section #}
+    <div id="form-input-replacable-content" class="col-md-8">
+      {% include 'main/prod-rslt-partial.html' %}
+    </div>
+  </div>
+</div>

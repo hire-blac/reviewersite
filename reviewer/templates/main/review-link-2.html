@@ -1,12 +1,12 @@
 <div class="border-bottom mt-4 p-3">
+
   <h5>
-    <a href="/products/{{review.product.id}}">{{review.product}}</a>
+    <p>Written by <a href="">{{review.user}}</a></p>
   </h5>
 
-  <h3>{{review.rating}} Stars</h3>
-
+  <h5>{{review.rating}} stars</h5>
   <p style="margin-bottom: 5px">
-    <a class="page-link text-dark" href="/reviews/{{review.id}}">{{review}}</a>
+    <a class="page-link" href="/reviews/{{review.id}}">{{review}}</a>
   </p>
 
   <div class="review-links">
@@ -43,9 +43,5 @@
       <strong class="me-3">{{review.num_downvotes}} downvotes</strong>
     </div>
 
-    <small>
-      <p>Written by <a href="">{{review.user}}</a></p>
-    </small>
-    
   </div>
 </div>

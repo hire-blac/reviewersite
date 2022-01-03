@@ -3,7 +3,9 @@ from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from reviewer.forms import CreateNewReview
+from django.contrib.auth import authenticate, login
+from register.forms import Login_Form
+from reviewer.forms import CreateNewProduct, CreateNewReview
 from .models import Category, Product, Profile, Review, Vote
 
 # Create your views here.
@@ -11,10 +13,12 @@ from .models import Category, Product, Profile, Review, Vote
 # homepage
 def index(response):
     reviews = Review.objects.all()
+    categories = Category.objects.all()
     user = response.user
     context = {
         'title': 'Homepage',
         'reviews':reviews,
+        'categories': categories,
         'user': user
         }
     return render(response, 'main/index.html', context )
@@ -33,13 +37,20 @@ def products(response):
     }
 
     if response.is_ajax():
-        html = render_to_string(
+        html1 = render_to_string(
             template_name='main/products-results-partial.html',
             context={ "products": products }
         )
 
-        data_dict = { "html_from_view": html }
+        html2 = render_to_string(
+            template_name='main/prod-rslt-partial.html',
+            context={ "products": products }
+        )
 
+        data_dict = {
+            "html_for_input": html2,
+            "html_from_view": html1
+        }
         return JsonResponse(data=data_dict, safe=False)
 
     return render(response, 'main/products.html', context)
@@ -48,12 +59,39 @@ def products(response):
 def products_details(response, id):
     product = Product.objects.get(id=id)
     reviews = Review.objects.filter(product=id)
+    form = CreateNewReview
     context = {
         'title': 'Product Details',
         'product': product,
-        'reviews': reviews
+        'reviews': reviews,
+        'form': form
         }
     return render(response, 'main/product-details.html', context )
+
+# new product
+def new_product(response):
+    if response.method == 'POST':
+        form = CreateNewProduct(response.POST)
+        if form.is_valid():
+            prod = form.cleaned_data
+            cat = Category.objects.get(id=prod['category'])
+            product = Product(
+                category=cat,
+                name=prod['name'],
+                description=prod['description'])
+            product.save()
+            return redirect('/products/' + str(product.id))
+    else:    
+        form = CreateNewProduct
+        categories = Category.objects.all()
+
+    context = {
+        'title': 'New Product',
+        'form': form,
+        'categories': categories
+    }
+
+    return render(response, 'main/newproduct.html', context)
 
 # single review
 def review(response, id):
@@ -132,16 +170,19 @@ def find_user(response):
 
 # create a new review
 def new_review(response):
- 
     if response.method == "POST":
         form = CreateNewReview(response.POST)
+        print(form)
 
         if form.is_valid():
             rev = form.cleaned_data
+
+            # get product object
+            product = Product.objects.get(name=response.POST.get('product'))
+
             review = Review(
                 user=response.user,
-                category=rev['category'],
-                product=rev['product'],
+                product=product,
                 rating=rev['rating'],
                 review=rev['review'])
             review.save()
@@ -153,6 +194,7 @@ def new_review(response):
     context = {
         'title':'New Review',
         'form':form,
+        # 'login_form': login_form,
         'categories': categories
         }
     return render(response, 'main/newreview.html', context )

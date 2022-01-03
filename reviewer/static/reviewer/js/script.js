@@ -2,6 +2,7 @@ const search_icon = $("#search-icon")
 const endpoint = "/products/"
 const delay_in_ms = 700
 let scheduled_function = false
+const product_input_div = $('#form-input-replacable-content')
 
 function search(element) {
   const search_input = element.id
@@ -33,7 +34,8 @@ let ajax_call = function (endpoint, request_parameters) {
     // fade out the products_div
     products_div.fadeTo('slow', 0).promise().then(()=>{
       // replace the html content
-      products_div.html(response["html_from_view"])
+      products_div.html(response["html_from_view"]);
+      product_input_div.html(response["html_for_input"]);
       // fade in the div with new content
       products_div.fadeTo('slow', 1)
       // stop animating search icon

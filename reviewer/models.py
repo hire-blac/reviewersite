@@ -32,7 +32,7 @@ class Review(models.Model):
     downvotes = models.ManyToManyField(User, default=None, blank=True, related_name='downvote')
     
     def __str__(self):
-        return self.product
+        return self.review
 
     @property
     def num_upvotes(self):
