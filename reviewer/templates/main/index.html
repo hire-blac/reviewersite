@@ -4,11 +4,22 @@
 
 {% block content %}
 
-  <h1>Homepage</h1>
-  <h3>All Reviews</h3>
-  {% include 'main/products-search.html' %}
+  <div class="landing">
+    <div class="overly">
+      <h2>Behind every review is an experience that matters</h2>
+      <p>
+        Read reviews. Write reviews. Find products
+      </p>
+
+      <a class="btn btn-primary land-butt" href="/reviews/new">Write a review</a>
+    </div>
+  </div>
+
+  <h3>Recent Reviews</h3>
   {% for review in reviews %}
-    {% include 'main/review-link.html' %}
+    <div class="col-md-6">
+      {% include 'main/review-link.html' %}
+    </div>
   {% endfor %}
 
 {% endblock content %}
