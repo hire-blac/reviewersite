@@ -21,8 +21,17 @@
       <button class="navbar-toggler border-0 " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+      <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
         
+        <div class="search-bar mx-5">
+          <input 
+            placeholder="search product"
+            id="nav-search"
+            onFocus=search(this)
+            >
+          <i id="search-icon" class="bi bi-search m-2"></i>
+        </div>
+
         <ul class="navbar-nav bg-light">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -40,38 +49,41 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/reviews/new">review+</a>
-          </li>
+          
         {% if user.is_authenticated %}
 
           <li class="nav-item">
-            <a class="nav-link" href="/profile">profile</a>
+            <a class="btn btn-primary" href="/reviews/new">Write a review</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">logout</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Profile
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item" href="/profile">my profile</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="">my reviews</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/logout">log out</a>
+              </li>
+            </ul>
           </li>
 
         {% else %}
 
           <li class="nav-item">
-            <a class="nav-link" href="/login">login</a>
+            <a class="nav-link" href="/login">sign in</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/register">sign up</a>
+            <a class="btn btn-primary" href="/register">sign up</a>
           </li>
 
         {% endif %}
 
         </ul>
-        <div class="search-bar">
-          <input 
-            placeholder="search product"
-            id="nav-search"
-            onFocus=search(this)
-            >
-          <i id="search-icon" class="bi bi-search m-2"></i>
-        </div>
       </div>
     </div>
   </nav>
@@ -81,12 +93,7 @@
     {% include 'main/products-results-partial.html' %}
   </div>
   
-  <div class="content p-3">
-    {% if user.is_authenticated %}
-      <p>User {{user.id}} {{user.username}} is logged in</p>
-    {% else %}
-      <p>No user logged in</p>
-    {% endif %}
+  <div class="conatner p-3">
 
     {% block content %}
 

@@ -39,3 +39,62 @@ nav a {
 .navbar-nav {
   background: #888;
 }
+.landing {
+  background: url("../../images/review.jpg");
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: contain;
+  height: 230px;
+  padding: 0;
+  margin-bottom: 50px;
+  z-index: -1;
+  overflow: visible;
+}
+.overly {
+  color: rgb(255, 255, 255);
+  background: rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px 1px rgb(0, 0, 0);
+  height: 100%;
+  padding: 30px 20px;
+  overflow: visible;
+}
+a.land-butt {
+  display: block;
+  position: relative;
+  top: 45px;
+  margin: 0 auto;
+  width: max-content;
+  padding: 10px;
+}
+
+@media screen and (min-width: 500px) {
+  
+  .landing {
+    background-position-y: -20px;
+    background-size: cover;
+    height: 300px;
+  }
+  .overly {
+    padding: 80px;
+  }
+  a.land-butt {
+    top: 85px;
+  }
+
+}
+
+@media screen and (min-width: 780px) {
+  
+  .landing {
+    background-position-y: -140px;
+    background-size: cover;
+    height: 350px;
+  }
+  .overly {
+    padding: 120px;
+  }
+  a.land-butt {
+    top: 120px;
+  }
+
+}

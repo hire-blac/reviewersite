@@ -1,51 +1,54 @@
-<div class="border-bottom mt-4 p-3">
-  <h5>
-    <a href="/products/{{review.product.id}}">{{review.product}}</a>
-  </h5>
-
-  <h3>{{review.rating}} Stars</h3>
-
-  <p style="margin-bottom: 5px">
-    <a class="page-link text-dark" href="/reviews/{{review.id}}">{{review}}</a>
-  </p>
-
-  <div class="review-links">
-    <form class="d-inline-block" action="{% url 'upvote' %}" method="POST">
-      {% csrf_token %}
-      <input type="hidden" name="review_id" value="{{review.id}}">
-      {% if user not in review.upvotes.all %} 
-        <button class="border-0 bg-transparent">
-          <i class="bi bi-arrow-up-circle"></i> upvote
-        </button>
-      {% else %}
-      <button class="border-0 bg-transparent">
-        <i class="bi bi-x-circle"></i> un-vote
-      </button>
-      {% endif %}
-    </form>
-    
-    <form class="d-inline-block" action="{% url 'downvote' %}" method="POST">
-      {% csrf_token %}
-      <input type="hidden" name="review_id" value="{{review.id}}">
-      {% if user not in review.downvotes.all %}
-      <button class="border-0 bg-transparent">
-        <i class="bi bi-arrow-down-circle"></i> downvote
-      </button>
-      {% else %}
-        <button class="border-0 bg-transparent">
-          <i class="bi bi-x-circle"></i> un-vote
-        </button>
-      {% endif %}
-    </form>
-
-    <div class="vote-count">
-      <strong class="me-3">{{review.num_upvotes}} upvotes</strong>
-      <strong class="me-3">{{review.num_downvotes}} downvotes</strong>
-    </div>
-
-    <small>
-      <p>Written by <a href="">{{review.user}}</a></p>
+<div class="row my-4">
+  <div class="border">
+    <small >
+      <p>
+        <a href="">{{review.user}}</a> reviewed 
+        <a href="/products/{{review.product.id}}">{{review.product}}</a>
+      </p>
     </small>
+    {% load my_filters %}
+    {% for i in review.rating|stars %}
+      <i class="bi bi-star-fill text-warning"></i>
+    {% endfor %}
+  
+    <p style="margin-bottom: 5px">
+      <a class="page-link text-dark" href="/reviews/{{review.id}}">{{review}}</a>
+    </p>
+    <small>
+      <div class="review-links">
+        <form class="d-inline-block" action="{% url 'upvote' %}" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="review_id" value="{{review.id}}">
+          {% if user not in review.upvotes.all %} 
+            <button class="border-0 bg-transparent">
+              <i class="bi bi-arrow-up-circle"></i> upvote
+            </button>
+          {% else %}
+          <button class="border-0 bg-transparent">
+            <i class="bi bi-x-circle"></i> un-vote
+          </button>
+          {% endif %}
+        </form>
+        
+        <form class="d-inline-block" action="{% url 'downvote' %}" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="review_id" value="{{review.id}}">
+          {% if user not in review.downvotes.all %}
+          <button class="border-0 bg-transparent">
+            <i class="bi bi-arrow-down-circle"></i> downvote
+          </button>
+          {% else %}
+            <button class="border-0 bg-transparent">
+              <i class="bi bi-x-circle"></i> un-vote
+            </button>
+          {% endif %}
+        </form>
     
+        <div class="vote-count">
+          <strong class="me-3">{{review.num_upvotes}} upvotes</strong>
+          <strong class="me-3">{{review.num_downvotes}} downvotes</strong>
+        </div>
+      </small>
+    </div>
   </div>
 </div>
