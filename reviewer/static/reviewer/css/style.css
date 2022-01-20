@@ -92,6 +92,11 @@ a.land-butt {
   width: 100%;
   height: 100%;
 }
+.followings img {
+  display: block;
+  width: 30px;
+  margin: 0 auto;
+}
 
 @media screen and (min-width: 500px) {
   

@@ -9,7 +9,7 @@
     <div class="col-md-4 border-end">
       <div class="profile-pic">
         {% comment %} <img src="{{profile.profile_pic.url}}" alt=""> {% endcomment %}
-        <img src="static/images/person-circle.svg" alt="">
+        <img src="/static/images/person-circle.svg" alt="">
       </div>
 
       <div class="text-center">
@@ -24,13 +24,19 @@
         </p>
       </div>
 
-      <div class="d-flex following justify-content-evenly border-bottom py-4">
-        <div>
-          <b>Following</b>
+      <div class="followings">
+        <img src="/static/images/people.svg" alt="">
+
+        <div class="d-flex justify-content-evenly border-bottom py-4">
+
+          <div>
+            <b>Following</b>
+          </div>
+          <div>
+            <b>Followers</b>
+          </div>
         </div>
-        <div>
-          <b>Followers</b>
-        </div>
+
       </div>
 
       <a href="/profile/edit" class="btn btn-primary my-5 d-block">edit profile</a>
