@@ -6,6 +6,7 @@ urlpatterns = [
     # path('reviews', views.reviews, name='reviews'),
     path('reviews/<int:id>', views.review, name='review'),
     path('profile', views.profile, name='profile'),
+    path('profile/edit', views.edit_profile, name='edit_profile'),
     path('reviews/new', views.new_review, name='new_review'),
     path('finduser', views.find_user, name='find_user'),
     path('upvote', views.upvote, name='upvote'),

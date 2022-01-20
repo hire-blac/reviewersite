@@ -209,3 +209,12 @@ def profile(response):
         'reviews': reviews
         }
     return render(response, 'main/myprofile.html', context )
+
+@login_required(login_url='/login/')
+def edit_profile(response):
+    my_profile = response.user.profile
+    context = {
+        'title': 'Edit Profile',
+        'profile': my_profile
+    }
+    return render( response, 'main/editprofile.html', context )
