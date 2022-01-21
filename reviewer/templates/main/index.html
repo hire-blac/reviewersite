@@ -15,11 +15,27 @@
     </div>
   </div>
 
-  <h3>Recent Reviews</h3>
-  {% for review in reviews %}
+  <div class="row">
+
     <div class="col-md-6">
-      {% include 'main/review-link.html' %}
+      <h4>Recent Reviews</h4>
+      {% for review in reviews %}
+          {% include 'main/review-link.html' %}
+      {% endfor %}
     </div>
-  {% endfor %}
+
+    <div class="col-md-3">
+
+    </div>
+
+    <div class="col-md-3">
+      <div class="trending-reviews border">
+        <h5>Trending</h5>
+      </div>
+      <div class="hot-reviews border">
+        <h5>Hot Reviews</h5>
+      </div>
+    </div>
+  </div>
 
 {% endblock content %}
