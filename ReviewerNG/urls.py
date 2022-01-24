@@ -22,9 +22,10 @@ from django.conf import settings
 
 urlpatterns = [
     path('', include('reviewer.urls')),
-    path('register/', v.register, name='register'),
+    # path('register/', v.register, name='register'),
     path('login/', v.user_login, name='user_login'),
     path('', include('django.contrib.auth.urls')),
+    path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls)
 ]
 

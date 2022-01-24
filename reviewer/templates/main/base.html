@@ -58,6 +58,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="/static/images/person-circle.svg" alt="">
+              <em class="mx-2">{{user.username}} </em>
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
@@ -67,7 +68,7 @@
                 <a class="dropdown-item border-bottom" href="">my reviews</a>
               </li>
               <li>
-                <a class="dropdown-item border-bottom" href="/logout">log out</a>
+                <a class="dropdown-item border-bottom" href="" data-bs-toggle="modal" data-bs-target="#logoutModal">log out</a>
               </li>
             </ul>
           </li>
@@ -75,10 +76,10 @@
         {% else %}
 
           <li class="nav-item">
-            <a class="nav-link" href="/login">sign in</a>
+            <a class="nav-link" href="/accounts/login">sign in</a>
           </li>
           <li class="nav-item">
-            <a class="btn btn-primary" href="/register">sign up</a>
+            <a class="btn btn-primary" href="/accounts/signup">sign up</a>
           </li>
 
         {% endif %}
@@ -93,7 +94,28 @@
     {% include 'main/products-results-partial.html' %}
   </div>
   
-  <div class="conatner p-3">
+  <div class="container-fluid p-3">
+
+    <!-- Logout Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="logoutModalLabel">Log Out</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Are you sure you want to log out?
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cancel</button>
+            <a class="btn btn-danger" href="/logout">log out</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     {% block content %}
 

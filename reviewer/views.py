@@ -6,7 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from register.forms import Login_Form
 from reviewer.forms import CreateNewProduct, CreateNewReview
-from .models import Category, Product, Profile, Review, Vote
+from . models import Category, Product, Review, Vote
+from accounts.models import Profile
 
 # Create your views here.
 
