@@ -1,8 +1,5 @@
-from django import dispatch
 from django.db import models
 from accounts.models  import CustomUser as User
-from django.dispatch import receiver
-from django.db.models.signals import pre_save, post_save
 
 # Create your models here.
 

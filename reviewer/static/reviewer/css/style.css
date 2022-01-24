@@ -97,6 +97,17 @@ a.land-butt {
   width: 30px;
   margin: 0 auto;
 }
+.trending-reviews {
+  height: 200px;
+  margin-bottom: 30px;
+  
+}
+
+.hot-reviews {
+  height: 200px;
+  margin-bottom: 30px;
+  
+}
 
 @media screen and (min-width: 500px) {
   
