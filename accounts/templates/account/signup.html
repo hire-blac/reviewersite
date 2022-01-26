@@ -1,7 +1,16 @@
-<!-- templates/account/signup.html -->
-<h2>Sign Up</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Sign Up</button>
-</form>
+{% extends 'main/base.html' %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+
+  <div class="col-md-6">
+    <!-- templates/account/signup.html -->
+    <h2>Sign Up</h2>
+    <form class="form-control" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+{% endblock %}
