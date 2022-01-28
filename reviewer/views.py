@@ -7,7 +7,6 @@ from django.contrib.auth import authenticate, login
 from register.forms import Login_Form
 from reviewer.forms import CreateNewProduct, CreateNewReview
 from . models import Category, Product, Review, Vote
-from accounts.models import Profile
 
 # Create your views here.
 
@@ -198,24 +197,3 @@ def new_review(response):
         'categories': categories
         }
     return render(response, 'main/newreview.html', context )
-
-# view profile page
-@login_required(login_url='/login/')
-def profile(response):
-    my_profile = response.user.profile
-    reviews = response.user.review.all()
-    context = {
-        'title':'My Profile',
-        'profile':my_profile,
-        'reviews': reviews
-        }
-    return render(response, 'main/myprofile.html', context )
-
-@login_required(login_url='/login/')
-def edit_profile(response):
-    my_profile = response.user.profile
-    context = {
-        'title': 'Edit Profile',
-        'profile': my_profile
-    }
-    return render( response, 'main/editprofile.html', context )

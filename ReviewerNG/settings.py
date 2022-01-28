@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'allauth.account',
     # 'allauth.socialaccount',
 
+    'crispy_forms',
+
     # Locals
     'accounts',
 ]
@@ -82,6 +84,8 @@ TEMPLATES = [
         },
     },
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 WSGI_APPLICATION = 'ReviewerNG.wsgi.application'
 

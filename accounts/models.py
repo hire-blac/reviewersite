@@ -11,11 +11,12 @@ class CustomUser(AbstractUser):
         return self.email
 
     
-class Profile(models.Model):
+class UserProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     first_name = models.CharField(default="random", max_length=200, null=True)
     last_name = models.CharField(default="person", max_length=200, null=True)
-    phone = models.CharField(max_length=200, null=True)
+    phone = models.CharField(max_length=200, null=True, blank=True)
+    about_me = models.TextField(default="random information about me", null=True, blank=True)
     profile_pic = models.ImageField(default="profile_pic.png", null=True, blank=True)
     followers = models.ManyToManyField(CustomUser, default=None, related_name="followers")
     date_created = models.DateTimeField(auto_now_add=True, null=True)
@@ -24,12 +25,12 @@ class Profile(models.Model):
     @receiver(post_save, sender=CustomUser)
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
-            Profile.objects.create(user=instance)
+            UserProfile.objects.create(user=instance)
     
     # save user profile
     @receiver(post_save, sender=CustomUser)
     def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
+        instance.userprofile.save()
 
     def __str__(self) -> str:
         return (self.user.username)

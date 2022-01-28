@@ -8,10 +8,10 @@ class CreateNewReview(forms.Form):
 	review = forms.CharField(widget=forms.Textarea,label='Review', max_length=200)
 	
 class CreateNewProduct(forms.Form):
-	choices = [('Books', 'Books'), ('Movies, Movies')]
-	# categories = Category.objects.all()
-	# for category in categories:
-	# 	choices.append((category.id, category.name))
+	choices = []
+	categories = Category.objects.all()
+	for category in categories:
+		choices.append((category.id, category.name))
 	
 	category = forms.ChoiceField(label='Category', widget=forms.Select, choices=choices)
 	name = forms.CharField(label='Name', max_length=200)
