@@ -1,3 +1,4 @@
+from dataclasses import fields
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
@@ -8,7 +9,7 @@ class CustomUser(AbstractUser):
     # add additional fields here
 
     def __str__(self):
-        return self.email
+        return self.username
 
     
 class UserProfile(models.Model):
@@ -18,7 +19,6 @@ class UserProfile(models.Model):
     phone = models.CharField(max_length=200, null=True, blank=True)
     about_me = models.TextField(default="random information about me", null=True, blank=True)
     profile_pic = models.ImageField(default="profile_pic.png", null=True, blank=True)
-    followers = models.ManyToManyField(CustomUser, default=None, related_name="followers")
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     # create user profile after user has been created
@@ -35,3 +35,14 @@ class UserProfile(models.Model):
     def __str__(self) -> str:
         return (self.user.username)
     
+class UserFollowing(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='following')
+    following_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='follower')
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'following_user'], name='follow once')
+        ]
+    
+    def __str__(self):
+        return (f'{self.user} follows {self.following_user}')
