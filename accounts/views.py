@@ -53,14 +53,14 @@ def follow(response, id):
     user = response.user
     following_user = CustomUser.objects.get(id=id)
     UserFollowing.objects.create(user=user, following_user=following_user)
-    return redirect('user_profile', id=id)
+    return redirect('/')
 
 @login_required(login_url='/login/')
 def unfollow(response, id):
     user = response.user
     following_user = CustomUser.objects.get(id=id)
     UserFollowing.objects.filter(user=user, following_user=following_user).delete()
-    return redirect('user_profile', id=id)
+    return redirect('/')
 
 
 def user_profile(response, id):
