@@ -12,7 +12,7 @@ from . models import Category, Product, Review, Vote
 
 # homepage
 def index(response):
-    reviews = Review.objects.all()
+    reviews = Review.objects.all().order_by('-created')
     categories = Category.objects.all()
     user = response.user
     context = {
@@ -58,7 +58,7 @@ def products(response):
 # product details
 def products_details(response, id):
     product = Product.objects.get(id=id)
-    reviews = Review.objects.filter(product=id)
+    reviews = Review.objects.filter(product=id).order_by('-created')
     form = CreateNewReview
     context = {
         'title': 'Product Details',

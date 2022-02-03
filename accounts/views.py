@@ -12,7 +12,7 @@ from accounts.models import CustomUser, UserFollowing, UserProfile
 def my_profile(response):
     user = response.user
     my_profile = user.userprofile
-    reviews = user.review.all()
+    reviews = user.review.all().order_by('-created')
     following = user.following.all()
     followers = user.follower.all()
 
@@ -68,7 +68,7 @@ def user_profile(response, id):
         return redirect(my_profile)
 
     profile = UserProfile.objects.get(id=id)
-    reviews = profile.user.review.all()
+    reviews = profile.user.review.all().order_by('-created')
     following = profile.user.following.all()
     followers = profile.user.follower.all()
     is_follower = False
