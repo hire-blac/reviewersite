@@ -16,7 +16,12 @@ body {
 .bi-search {
   display: none;
 }
-
+.login label, .signup label {
+  display: none;
+}
+.login input, .signup input {
+  margin: 20px 0;
+}
 nav {
   display: flex;
   justify-content: space-between;
