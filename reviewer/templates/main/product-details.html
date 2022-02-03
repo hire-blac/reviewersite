@@ -3,7 +3,7 @@
 {% block title %}{{title}}{% endblock title %}
 
 {% block content %}
-
+{% comment %} 
   <div class="mb-3 border-bottom border-5">
 
     <h4>Product Details</h4>
@@ -57,5 +57,107 @@
   {% else %}
     <p>No reviews for {{product.name}}</p>
   {% endif %}
+
+
+ {% endcomment %}
+
+
+  <div class="row p-3">
+
+    <div class="col-md-4 border-end">
+        
+      <h4>Product Details</h4>
+      <h2>{{product.name}}</h2>
+      <h5>Category: {{product.category}}</h5>
+
+      <p>
+        {% if user.is_authenticated %}
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Write a review
+          </button>
+        {% else %}
+          <b>
+            <a href="/accounts/login/">Log in to write a review</a>
+          </b>
+        {% endif %}
+      </p>
+    
+      <div class="row">
+        <div class="col">
+          <div class="collapse multi-collapse" id="reviewForm">
+            <div class="card card-body">
+    
+              <form class="form-control border-0 p-3" action="/reviews/new" method='post'>
+                {% csrf_token %}
+            
+                <input 
+                  type="text"
+                  name="product"
+                  value="{{product.name}}"
+                  hidden=true  
+                >
+                {{form.as_p}}
+            
+                <button class="btn btn-primary">post</button>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="col-md-8 px-4">
+      
+      <h3>Reviews</h3>
+      {% if reviews %}
+        {% for review in reviews %}
+          {% include 'main/review-link-2.html' %}
+        {% endfor %}
+      {% else %}
+        <p>No reviews for {{product.name}}</p>
+      {% endif %}
+
+    </div>
+
+  </div>
+
+ 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Write a review</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <form class="form-control border-0 p-3" action="/reviews/new" method='post'>
+          {% csrf_token %}
+      
+          <input 
+            type="text"
+            name="product"
+            value="{{product.name}}"
+            hidden=true  
+          >
+          {{form.as_p}}
+      
+          <button class="btn btn-primary">post</button>
+          
+        </form>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
   
 {% endblock content %}
