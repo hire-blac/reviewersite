@@ -69,7 +69,7 @@ def products_details(response, id):
     return render(response, 'main/product-details.html', context )
 
 # new product
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def new_product(response):
     if response.method == 'POST':
         form = CreateNewProduct(response.POST)
@@ -104,7 +104,7 @@ def review(response, id):
     return render(response, 'main/review.html', context )
 
 # # upvote a review
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def upvote(response):
     user = response.user
     if response.method == 'POST':
@@ -132,7 +132,7 @@ def upvote(response):
     return redirect('index')
 
 # downvote a review
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def downvote(response):
     user = response.user
     if response.method == 'POST':
@@ -170,7 +170,7 @@ def find_user(response):
 #     return render(response, 'main/allreviews.html', {'title': 'Reviews', 'reviews':reviews})
 
 # create a new review
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def new_review(response):
     if response.method == "POST":
         form = CreateNewReview(response.POST)

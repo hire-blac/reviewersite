@@ -8,7 +8,7 @@ from accounts.models import CustomUser, UserFollowing, UserProfile
 # Create your views here.
 
 # view profile page
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def my_profile(response):
     user = response.user
     my_profile = user.userprofile
@@ -26,7 +26,7 @@ def my_profile(response):
 
     return render(response, 'account/myprofile.html', context )
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def edit_profile(response):
 
     profile = response.user.userprofile
@@ -48,14 +48,14 @@ def edit_profile(response):
     return render(response, 'account/edit-profile.html', context)
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def follow(response, id):
     user = response.user
     following_user = CustomUser.objects.get(id=id)
     UserFollowing.objects.create(user=user, following_user=following_user)
     return redirect('/')
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def unfollow(response, id):
     user = response.user
     following_user = CustomUser.objects.get(id=id)
