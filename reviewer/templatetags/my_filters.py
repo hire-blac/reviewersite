@@ -5,3 +5,7 @@ register = Library()
 @register.filter(name='stars')
 def stars(num):
     return range(num)
+
+@register.filter(name='length')
+def length(follow):
+    return len(follow)

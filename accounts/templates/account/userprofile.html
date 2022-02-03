@@ -41,21 +41,22 @@
 
       </div>
 
-      <a href="/profile/edit" class="btn btn-primary my-5 d-block">edit profile</a>
+      {% if is_follower %}
+        <a href="/profile/{{profile.user.id}}/unfollow" class="btn btn-danger my-5 d-block">Unfollow</a>
+      {% else %}
+        <a href="/profile/{{profile.user.id}}/follow" class="btn btn-primary my-5 d-block">Follow</a>
+      {% endif %}
+
     </div>
 
     <div class="col-md-8 px-4">
-
-      <a href="/reviews/new" class="btn btn-primary mb-4">Write a review</a>
-
       {% if reviews %}
         {% for review in reviews %}
-          {% include 'main/review-link-1.html' %}
+          {% include 'main/review-link-3.html' %}
         {% endfor %}
       {% else %}
         <h4 class="text-center">No reviews yet</h4>
       {% endif %}
-
     </div>
 
   </div>
