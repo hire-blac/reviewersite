@@ -27,11 +27,11 @@
         <small>
           {% if user not in review.upvotes.all %}
           <button class="border-0 bg-transparent">
-            <i class="bi bi-arrow-up-circle"></i> upvote
+            <i class="bi bi-arrow-up-circle text-primary"></i> upvote
           </button>
           {% else %}
           <button class="border-0 bg-transparent">
-            <i class="bi bi-x-circle"></i> un-vote
+            <i class="bi bi-x-circle text-warning"></i> un-vote
           </button>
           {% endif %}
         </small>
@@ -43,11 +43,11 @@
         <small>
           {% if user not in review.downvotes.all %}
           <button class="border-0 bg-transparent">
-            <i class="bi bi-arrow-down-circle"></i> downvote
+            <i class="bi bi-arrow-down-circle text-danger"></i> downvote
           </button>
           {% else %}
             <button class="border-0 bg-transparent">
-              <i class="bi bi-x-circle"></i> un-vote
+              <i class="bi bi-x-circle text-warning"></i> un-vote
             </button>
           {% endif %}
         </small>
