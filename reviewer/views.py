@@ -3,11 +3,9 @@ from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
-from register.forms import Login_Form
 from reviewer.forms import CreateNewProduct, CreateNewReview
 from . models import Category, Product, Review, Vote
-
+from accounts.models import UserProfile
 # Create your views here.
 
 # homepage
@@ -19,7 +17,7 @@ def index(response):
         'title': 'Homepage',
         'reviews':reviews,
         'categories': categories,
-        'user': user
+        'user': user,
         }
     return render(response, 'main/index.html', context )
 
