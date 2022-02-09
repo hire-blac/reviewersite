@@ -1,36 +1,64 @@
+<div class="border rounded-3 bg-white my-2 p-3">
 
-<div class="border bg-white p-2 mb-4">
 
-  <div class="border-bottom p-2">
-    {% load my_filters %}
-    {% for i in review.rating|stars %}
-      <i class="bi bi-star-fill text-warning"></i>
-    {% endfor %}
-  </div>
-
-  <div class="p-2 pb-0">
+  <div class="">
     <small >
-      <p class="">
-        <a class="text-decoration-none" href="/products/{{review.product.id}}">{{review.product}}</a>
-      </p>
+      <a class="" href="/products/{{review.product.id}}">{{review.product}}</a>
     </small>
   </div>
 
-  <p class="px-2 review-body">
-    <a class="text-dark text-decoration-none" href="/reviews/{{review.id}}">{{review}}</a>
-  </p>
+  <div class="ms-4 me-2">
 
-  <div class="vote border-top pt-2">
+    <div class="my-2">
 
-    <div class="vote-count px-2">
-      <small>
-        <strong class="me-3">{{review.num_upvotes}} upvotes</strong>
-        <strong class="me-3">{{review.num_downvotes}} downvotes</strong>
-      </small>
+      {% load my_filters %}
+
+      {% for i in review.rating|stars %}
+        <i class="bi bi-star-fill text-warning"></i>
+      {% endfor %}
     </div>
 
-    <a href="" class="btn btn-primary ms-2 my-2">edit</a>
+    <p class="review-body">
+      <a class="text-dark text-decoration-none" href="/reviews/{{review.id}}">{{review}}</a>
+    </p>
+  
+    <div class="vote d-flex w-75 justify-content-between align-items-center">
+      
+      <div class="d-inline-block">
+        <a href="" class="nav-link p-0 d-inline-block">
+          <i class="bi bi-chat"></i>
+        </a>
+      </div>
+  
+      <div class="d-inline-block">
+
+        <button class="upvote text-muted">
+          <i class="bi bi-chevron-up me-3"></i>
+          {{review.num_upvotes|vote_count}}
+        </button>
+
+      </div>
+      
+      <div class="d-inline-block">
+
+        <button class="downvote text-muted">
+          <i class="bi bi-chevron-down me-3"></i>
+          {{review.num_downvotes|vote_count}}
+        </button>
+
+      </div>
+  
+      <div class="d-inline-block">
+        <a href="" class="nav-link d-inline-block">
+          <i class="bi bi-share"></i>
+        </a>
+      </div>
+  
+    </div>
+
+    <a href="" class="btn btn-primary my-2">edit</a>
     <a href="" class="btn btn-danger ms-3 my-2">delete</a>
 
   </div>
+
 </div>
