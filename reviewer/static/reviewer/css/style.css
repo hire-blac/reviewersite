@@ -17,10 +17,10 @@ body {
   display: none;
 }
 .login label, .signup label {
-  display: none;
+  /* display: none; */
 }
 .login input, .signup input {
-  margin: 20px 0;
+  margin: 10px 0 20px;
 }
 nav {
   display: flex;
@@ -112,6 +112,22 @@ a.land-butt {
   height: 200px;
   margin-bottom: 30px;
   
+}
+
+/* Voting Buttons Styles */
+.vote button {
+  border: none;
+  background: none;
+  padding: 3px 12px;
+  border-radius: 10px;
+}
+
+.vote button.upvote:hover {
+  background: rgba(115, 152, 233, 0.3);
+}
+
+.vote button.downvote:hover {
+  background: rgba(233, 115, 121, 0.3);
 }
 
 @media screen and (min-width: 500px) {

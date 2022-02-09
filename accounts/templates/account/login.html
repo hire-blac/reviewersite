@@ -5,15 +5,30 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <div class="col-md-6 m-auto">
+  <div class="col-md-5">
     <!-- templates/account/login.html -->
     
-    <form class="form-control login py-3" method="post">
-      <h4>Log In</h4>
+    <form class="form-control login p-4" method="post">
+     
       {% csrf_token %}
+
+      <a href="" class="btn btn-primary w-100 p-2 mb-5">Sign in with Google</a>
+      
+      <p class="mb-4 text-center">or sign in with email</p>
+      
       {{ form|crispy }}
-      <p><small>Don't have an account? Sign up <a href="/accounts/signup">here</a></small></p>
-      <button type="submit" class="btn btn-primary">Log In</button>
+
+      <p>
+        <small>Your password must be at least 8 characters long 
+          and must contain at least one number.
+        </small>
+      </p>
+      
+      <button type="submit" class="btn btn-primary w-100 mt-3">Log In</button>
+
+      <p class="m-3 text-end text-decoration-none"><a href="">Forgot Password?</a></p>
+      <p class="mt-5 mb-3 text-center">Don't have an account? Sign up <a href="/accounts/signup">here</a></p>
+      
     </form>
 
   </div>
