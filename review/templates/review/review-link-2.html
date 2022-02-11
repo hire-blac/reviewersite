@@ -1,0 +1,86 @@
+
+<div class="border rounded-3 bg-white my-3 p-3">
+
+  <div class="">
+    <small >
+        Written by <a class="text-decoration-none" href="/profile/{{review.user.id}}">{{review.user}}</a>
+    </small>
+  </div>
+
+  <div class="ms-4 me-2">
+
+    <div class="my-2">
+
+      {% load my_filters %}
+
+      {% for i in review.rating|stars %}
+        <i class="bi bi-star-fill text-warning"></i>
+      {% endfor %}
+    </div>
+
+    <p class="review-body">
+      <a class="text-dark text-decoration-none" href="/review/{{review.id}}">{{review}}</a>
+    </p>
+  
+    <div class="vote d-flex w-75 justify-content-between align-items-center">
+      
+      <div class="d-inline-block">
+        <a href="" class="nav-link p-0 d-inline-block">
+          <i class="bi bi-chat"></i>
+        </a>
+      </div>
+  
+      <div class="d-inline-block">
+        <form class="" action="{% url 'upvote' %}" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="review_id" value="{{review.id}}">
+          <small>
+            {% if user not in review.upvotes.all %}
+            <button class="upvote text-muted">
+              <i class="bi bi-chevron-up me-3"></i>
+              {{review.num_upvotes|vote_count}}
+            </button>
+            {% else %}
+            <button class="upvote text-primary">
+              <i class="bi bi-chevron-up me-3"></i>
+              {{review.num_upvotes|vote_count}}
+            </button>
+            {% endif %}
+          </small>
+        </form>
+      </div>
+      
+      <div class="d-inline-block">
+        <form class="" action="{% url 'downvote' %}" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="review_id" value="{{review.id}}">
+          <small>
+            {% if user not in review.downvotes.all %}
+            <button class="downvote text-muted">
+              <i class="bi bi-chevron-down me-3"></i>
+              {{review.num_downvotes|vote_count}}
+            </button>
+            {% else %}
+              <button class="downvote text-danger">
+                <i class="bi bi-chevron-down me-3"></i>
+                {{review.num_downvotes|vote_count}}
+              </button>
+            {% endif %}
+          </small>
+        </form>
+      </div>
+  
+      <div class="d-inline-block">
+        <a href="" class="nav-link d-inline-block">
+          <i class="bi bi-share"></i>
+        </a>
+      </div>
+  
+    </div>
+  </div>
+
+</div>
+
+
+
+

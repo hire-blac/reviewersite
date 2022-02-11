@@ -6,7 +6,7 @@
   {% if user.is_authenticated %}
 
     {% for review in reviews %}
-      <h2><a href="/reviews/{{review.id}}">{{review.product}}</a></h2>
+      <h2><a href="/review/{{review.id}}">{{review.product}}</a></h2>
         <strong>{{review.num_upvotes}} upvotes</strong>
         <strong>{{review.num_upvotes}} downvotes</strong>
       <small>

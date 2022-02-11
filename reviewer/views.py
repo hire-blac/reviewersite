@@ -3,9 +3,12 @@ from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from reviewer.forms import CreateNewProduct, CreateNewReview
-from . models import Category, Product, Review, Vote
+from review.forms import CreateNewReview
+from review.models import Review
+from reviewer.forms import CreateNewProduct
+from . models import Category, Product
 from accounts.models import UserProfile
+
 # Create your views here.
 
 # homepage
@@ -92,69 +95,6 @@ def new_product(response):
 
     return render(response, 'main/newproduct.html', context)
 
-# single review
-def review(response, id):
-    review = Review.objects.get(id=id)
-    context = {
-        'title': 'Review',
-        'review':review
-        }
-    return render(response, 'main/review.html', context )
-
-# # upvote a review
-@login_required(login_url='/accounts/login/')
-def upvote(response):
-    user = response.user
-    if response.method == 'POST':
-        review_id = response.POST.get('review_id')
-        review = Review.objects.get(id=review_id)
-        print(user)
-        if user not in review.upvotes.all():
-            if user in review.downvotes.all():
-                review.downvotes.remove(user)
-            review.upvotes.add(user)
-        else:
-            review.upvotes.remove(user)
-            
-
-        vote, created = Vote.objects.get_or_create(user=user, review=review)
-
-        if not created:
-            if vote.value == 'Downvote':
-                vote.value = 'Upvote'
-        else:
-            vote.value = 'Upvote'
-        vote.save()
-
-    print('Liked')
-    return redirect('index')
-
-# downvote a review
-@login_required(login_url='/accounts/login/')
-def downvote(response):
-    user = response.user
-    if response.method == 'POST':
-        review_id = response.POST.get('review_id')
-        review = Review.objects.get(id=review_id)
-        if user not in review.downvotes.all():
-            if user in review.upvotes.all():
-                review.upvotes.remove(user)
-            review.downvotes.add(user)
-        else:
-            review.downvotes.remove(user)
-        
-        vote, created = Vote.objects.get_or_create(user=user, review=review)
-
-        if not created:
-            if vote.value == 'Upvote':
-                vote.value = 'Downvote'
-        else:
-            vote.value = 'Downvote'
-        vote.save()
-        
-    print('Unliked')
-    return redirect('index')
-
 # find user
 def find_user(response):
     if response.method == "POST":
@@ -166,34 +106,3 @@ def find_user(response):
 # def reviews(response):
 #     reviews = Review.objects.all()
 #     return render(response, 'main/allreviews.html', {'title': 'Reviews', 'reviews':reviews})
-
-# create a new review
-@login_required(login_url='/accounts/login/')
-def new_review(response):
-    if response.method == "POST":
-        form = CreateNewReview(response.POST)
-
-        if form.is_valid():
-            rev = form.cleaned_data
-
-            # get product object
-            product = Product.objects.get(name=response.POST.get('product'))
-
-            review = Review(
-                user=response.user,
-                product=product,
-                rating=rev['rating'],
-                review=rev['review'])
-            review.save()
-            response.user.review.add(review)
-            return redirect('index')
-    else:    
-        form = CreateNewReview
-        categories = Category.objects.all()
-    context = {
-        'title':'New Review',
-        'form':form,
-        # 'login_form': login_form,
-        'categories': categories
-        }
-    return render(response, 'main/newreview.html', context )

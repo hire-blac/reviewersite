@@ -1,12 +1,7 @@
 from django import forms
-from django.forms.widgets import Textarea
 
 from reviewer.models import Category
 
-class CreateNewReview(forms.Form):
-	rating = forms.IntegerField(label='Rating', min_value=0, max_value=5)
-	review = forms.CharField(widget=forms.Textarea,label='Review', max_length=200)
-	
 class CreateNewProduct(forms.Form):
 	choices = []
 	categories = Category.objects.all()
