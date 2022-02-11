@@ -41,8 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'reviewer.apps.ReviewerConfig',
-    # 'register.apps.RegisterConfig',
+    # 'reviewer.apps.ReviewerConfig',
     'django.contrib.sites',
 
     # 3rd party
@@ -54,6 +53,8 @@ INSTALLED_APPS = [
 
     # Locals
     'accounts',
+    'review',
+    'reviewer',
 ]
 
 MIDDLEWARE = [

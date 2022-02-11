@@ -11,7 +11,7 @@
         Read reviews. Write reviews. Find products
       </p>
 
-      <a class="btn btn-primary land-butt" href="/reviews/new">Write a review</a>
+      <a class="btn btn-primary land-butt" href="/review/new">Write a review</a>
     </div>
   </div>
 
@@ -20,7 +20,7 @@
     <div class="col-md-8">
       <h4>Recent Reviews</h4>
       {% for review in reviews %}
-          {% include 'main/review-link.html' %}
+          {% include 'review/review-link.html' %}
       {% endfor %}
     </div>
 

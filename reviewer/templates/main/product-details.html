@@ -3,64 +3,6 @@
 {% block title %}{{title}}{% endblock title %}
 
 {% block content %}
-{% comment %} 
-  <div class="mb-3 border-bottom border-5">
-
-    <h4>Product Details</h4>
-    <h2>{{product.name}}</h2>
-    <h5>Category: {{product.category}}</h5>
-    
-  </div>
-  
-  <p>
-    {% if user.is_authenticated %}
-      <a class="btn btn-primary" data-bs-toggle="collapse"
-        href="#reviewForm" role="button" aria-expanded="false"
-        aria-controls="reviewForm">Write a review</a>
-    {% else %}
-      <b>
-        <a href="/accounts/login/">Log in to write a review</a>
-      </b>
-    {% endif %}
-  </p>
-
-  <div class="row">
-    <div class="col">
-      <div class="collapse multi-collapse" id="reviewForm">
-        <div class="card card-body">
-
-          <form class="form-control border-0 p-3" action="/reviews/new" method='post'>
-            {% csrf_token %}
-        
-            <input 
-              type="text"
-              name="product"
-              value="{{product.name}}"
-              hidden=true  
-            >
-            {{form.as_p}}
-        
-            <button class="btn btn-primary">post</button>
-            
-          </form>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <h3>Reviews</h3>
-  {% if reviews %}
-    {% for review in reviews %}
-      {% include 'main/review-link-2.html' %}
-    {% endfor %}
-  {% else %}
-    <p>No reviews for {{product.name}}</p>
-  {% endif %}
-
-
- {% endcomment %}
-
 
   <div class="row p-3">
 
@@ -88,7 +30,7 @@
           <div class="collapse multi-collapse" id="reviewForm">
             <div class="card card-body">
     
-              <form class="form-control border-0 p-3" action="/reviews/new" method='post'>
+              <form class="form-control border-0 p-3" action="/review/new" method='post'>
                 {% csrf_token %}
             
                 <input 
@@ -114,7 +56,7 @@
       <h3>Reviews</h3>
       {% if reviews %}
         {% for review in reviews %}
-          {% include 'main/review-link-2.html' %}
+          {% include 'review/review-link-2.html' %}
         {% endfor %}
       {% else %}
         <p>No reviews for {{product.name}}</p>
@@ -124,7 +66,6 @@
 
   </div>
 
- 
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -136,7 +77,7 @@
       </div>
       <div class="modal-body">
         
-        <form class="form-control border-0 p-3" action="/reviews/new" method='post'>
+        <form class="form-control border-0 p-3" action="/review/new" method='post'>
           {% csrf_token %}
       
           <input 
