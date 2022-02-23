@@ -1,6 +1,6 @@
 from django.db import models
 from accounts.models  import CustomUser as User
-from reviewer.models import Product
+from product.models import Product
 
 # Create your models here.
 

@@ -7,7 +7,7 @@
     <ul class="list-unstyled border">
       {% for product in products %}
         <li class="p-2 border-bottom ">
-          <a href="/products/{{product.id}}">{{product}}</a>
+          <a href="/product/{{product.id}}">{{product}}</a>
         </li>
       {% endfor %}
     </ul>
@@ -16,6 +16,6 @@
 {% else %}
   <div class="p-3">
     <p>No product found</p>
-    <p>Add new product <a href="/products/new">here</a>.</p>
+    <p>Add new product <a href="/product/new">here</a>.</p>
   </div>
 {% endif %}

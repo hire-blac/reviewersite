@@ -50,11 +50,13 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount',
 
     'crispy_forms',
+    'eav',
 
     # Locals
     'accounts',
     'review',
     'reviewer',
+    'product',
 ]
 
 MIDDLEWARE = [

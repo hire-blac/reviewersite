@@ -4,6 +4,7 @@ const delay_in_ms = 700
 let scheduled_function = false
 const product_input_div = $('#form-input-replacable-content')
 
+
 function search(element) {
   const search_input = element.id
   const display_div = search_input + "-replacable-content"

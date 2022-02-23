@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from . forms import CreateNewReview
 from . models import Review, Vote
-from reviewer.models import Product
+from product.models import Product
 
 
 # Create your views here.
@@ -87,6 +87,7 @@ def new_review(response):
                 product=product,
                 rating=rev['rating'],
                 review=rev['review'])
+            print(review.product)
             review.save()
             response.user.review.add(review)
             return redirect('index')

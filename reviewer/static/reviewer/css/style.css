@@ -76,7 +76,7 @@ nav a {
 a.land-butt {
   display: block;
   position: relative;
-  top: 45px;
+  top: 35px;
   margin: 0 auto;
   width: max-content;
   padding: 10px;
@@ -87,9 +87,26 @@ a.land-butt {
 }
 
 /* Profile Styles */
+.profile-details {
+  position: relative;
+}
+.profile-card {
+  position: fixed;
+  top: auto;
+  left: auto;
+  opacity: 1;
+  z-index: 1;
+  margin: 0 20px;
+  background-color: white;
+}
+.profile-reviews {
+  position: relative;
+  top: auto;
+  left: 360px;
+}
 .profile-pic {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   margin: auto;
 }
 .profile-pic img {
