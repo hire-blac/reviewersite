@@ -1,5 +1,5 @@
 const search_icon = $("#search-icon")
-const endpoint = "/products/"
+const endpoint = "/product/"
 const delay_in_ms = 700
 let scheduled_function = false
 const product_input_div = $('#form-input-replacable-content')
