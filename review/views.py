@@ -23,7 +23,6 @@ def upvote(response):
     if response.method == 'POST':
         review_id = response.POST.get('review_id')
         review = Review.objects.get(id=review_id)
-        print(user)
         if user not in review.upvotes.all():
             if user in review.downvotes.all():
                 review.downvotes.remove(user)
@@ -87,7 +86,6 @@ def new_review(response):
                 product=product,
                 rating=rev['rating'],
                 review=rev['review'])
-            print(review.product)
             review.save()
             response.user.review.add(review)
             return redirect('index')
