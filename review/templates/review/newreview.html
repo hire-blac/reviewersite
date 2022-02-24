@@ -10,9 +10,9 @@
     {% csrf_token %}
 
     <label for="product">Product:</label>
-    {% include 'main/prod-srch.html' %}
+    {% include 'product/prod-srch.html' %}
     {{form.as_p}}
-
+    
     {% if user.is_authenticated %}
       <button>post</button>
     {% else %}

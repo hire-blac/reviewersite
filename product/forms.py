@@ -4,13 +4,6 @@ from . models import *
 
 from eav.forms import BaseDynamicEntityForm
 
-# class ProductForm(ModelForm):
-    
-#     class Meta:
-#         model = Product
-#         fields = '__all__'
-        
-
 class ProductAdminForm(BaseDynamicEntityForm):
     model = Product
 
