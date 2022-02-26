@@ -65,7 +65,7 @@ def new_product(response):
 
     context = {
         'title': 'New Product',
-        'form': form
+        'form': form,
     }
 
     return render(response, 'product/new-product.html', context)
