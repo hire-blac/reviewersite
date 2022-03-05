@@ -104,7 +104,7 @@
         <h5>Comments</h5>
         {% for comment in comments %}
           <div class="my-3 p-2 border-top">
-            {{comment.user}} commented... <br>
+            <a class="text-decoration-none" href="/profile/{{review.user.id}}">{{review.user}}</a><br>
             {{comment}}
           </div>
         {% endfor %}
