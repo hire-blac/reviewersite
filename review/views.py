@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from . forms import CreateNewReview
-from . models import Review, Vote
+from . forms import CreateNewReview, NewComment
+from . models import Comment, Review, Vote
 from product.models import Product
 
 
@@ -10,10 +10,18 @@ from product.models import Product
 # single review
 def review(response, id):
     review = Review.objects.get(id=id)
+    comments = review.comment.all()
+    comment_count = review.comment.all().count()
+    form = NewComment
+
     context = {
         'title': 'Review',
-        'review':review
+        'review':review,
+        'comments': comments,
+        'comment_count': comment_count,
+        'form': form
         }
+
     return render(response, 'review/review.html', context )
 
 # # upvote a review
@@ -97,3 +105,36 @@ def new_review(response):
         'form':form
         }
     return render(response, 'review/newreview.html', context )
+
+# create a new comment
+@login_required(login_url='/accounts/login/')
+def new_comment(response):
+    if response.method == "POST":
+        form = NewComment(response.POST)
+
+        if form.is_valid():
+            comm = form.cleaned_data
+
+            # get review object
+            review = Review.objects.get(id=response.POST.get('review'))
+
+            comment = Comment(
+                user=response.user,
+                review=review,
+                comment=comm['comment']
+            )
+            comment.save()
+
+            # # add user to review commenters
+            # review.comments.add(response.user)
+
+            # add comment to review
+            review.comment.add(comment)
+            return redirect('index')
+    else:
+        form = NewComment
+        context = {
+            "title": "Comment",
+            'form': form
+        }
+    return render(response, 'review/comment', context)

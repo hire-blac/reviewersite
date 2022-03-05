@@ -6,5 +6,5 @@ urlpatterns = [
     path('new', views.new_review, name='new_review'),
     path('upvote', views.upvote, name='upvote'),
     path('downvote', views.downvote, name='downvote'),
-
+    path('comment', views.new_comment, name='new_comment'),
 ]

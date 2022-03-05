@@ -4,7 +4,32 @@ const delay_in_ms = 700
 let scheduled_function = false
 const product_input_div = $('#form-input-replacable-content')
 
+// hide all input fields for new product
+$('.many-attributes input').hide();
 
+const category = $('#id_category')
+category.change(function(){
+  const cat = $(this).val()
+  $('.many-attributes input').hide();
+
+  switch (cat) {
+    case '1':
+      console.log($(this).val());
+      $('.many-attributes .book').show();
+      break;
+    case '2':
+      $('.many-attributes .car').show();
+      break;
+    case '3':
+      $('.many-attributes .music').show();
+      break;
+    case '4':
+      $('.many-attributes .others').show();
+      break;
+  }
+})
+
+// search for product
 function search(element) {
   const search_input = element.id
   const display_div = search_input + "-replacable-content"
@@ -45,3 +70,21 @@ let ajax_call = function (endpoint, request_parameters) {
     })
   })
 }
+
+// hide every comment box
+$('.comment-box').hide()
+
+// event handler for comment button to toggle comment form
+$('.comment-button').on('click', function () {
+  // find parent div of (this)element with class review
+  var $vn = $(this.closest('.review'))
+
+  // find child element with class comment-box
+  var comment = $vn.find('.comment-box')
+
+  // toggle comment-box with callback to hide other comment-boxes
+  comment.toggle(function(){
+    $(this).find('textarea').focus()
+    $('.comment-box').not($(this)).hide()
+  })
+})

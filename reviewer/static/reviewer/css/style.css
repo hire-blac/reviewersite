@@ -16,8 +16,8 @@ body {
 .bi-search {
   display: none;
 }
-.login label, .signup label {
-  /* display: none; */
+.many-attributes label {
+  display: none;
 }
 .login input, .signup input {
   margin: 10px 0 20px;
@@ -138,13 +138,33 @@ a.land-butt {
   padding: 3px 12px;
   border-radius: 10px;
 }
-
 .vote button.upvote:hover {
   background: rgba(115, 152, 233, 0.3);
 }
-
 .vote button.downvote:hover {
   background: rgba(233, 115, 121, 0.3);
+}
+
+/* Comment Buttons Styles */
+.vote a.comment-button {
+  border: none;
+  background: none;
+  padding: 3px 12px;
+  border-radius: 10px;
+}
+.vote a.comment-button:hover {
+  background: rgba(115, 152, 233, 0.3);
+}
+
+.comment-form textarea {
+  margin-top: 10px;
+  height: 90px;
+  width: 100%;
+  padding: 5px;
+  overflow-y: auto;
+}
+.comment-form label {
+  display: none;
 }
 
 @media screen and (min-width: 500px) {

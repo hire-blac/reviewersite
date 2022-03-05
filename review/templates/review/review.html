@@ -4,27 +4,114 @@
 
 {% block content %}
 
-  <h1>Single Review Page</h1>
-  <h3>{{review.product}}</h3>
-  <h3>Rating: {{review.rating}} Stars</h3>
-  <small>Written by {{review.user.username}}</small>
-  <p>{{review.review}}</p>
-  <form action="{% url 'upvote' %}" method="POST">
-    {% csrf_token %}
-    <input type="hidden" name="review_id" value="{{review.id}}">
-    {% if user not in review.upvote.all %}
-      <button>upvote</button>
-    {% endif %}
-  </form>
-  <strong>{{review.num_upvotes}} upvotes</strong>
+  <div class="border rounded-3 bg-white my-3 p-3">
+
+    <div class="">
+      <small >
+          <a class="text-decoration-none" href="/profile/{{review.user.id}}">{{review.user}}</a> reviewed 
+          <a class="" href="/product/{{review.product.id}}">{{review.product}}</a>
+      </small>
+    </div>
   
-  <form action="{% url 'downvote' %}" method="POST">
-    {% csrf_token %}
-    <input type="hidden" name="review_id" value="{{review.id}}">
-    {% if user not in review.downvote.all %}
-      <button>downvote</button>
-    {% endif %}
-  </form>
-  <strong>{{review.num_upvotes}} downvotes</strong>
+    <div class="ms-4 me-2">
+  
+      <div class="my-2">
+  
+        {% load my_filters %}
+  
+        {% for i in review.rating|stars %}
+          <i class="bi bi-star-fill text-warning"></i>
+        {% endfor %}
+      </div>
+      
+      <p class="review-body">
+        <a class="text-dark text-decoration-none" href="/review/{{review.id}}">{{review}}</a>
+      </p>
+    
+      <div class="vote d-flex w-75 justify-content-between align-items-center">
+        
+        <div class="d-inline-block">
+          <a href="" class="nav-link comment">
+            <i class="bi bi-chat me-3"></i>
+              {{ comment_count }}
+          </a>
+          
+        </div>
+    
+        <div class="d-inline-block">
+          <form class="" action="{% url 'upvote' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="review_id" value="{{review.id}}">
+            <small>
+              {% if user not in review.upvotes.all %}
+              <button class="upvote text-muted">
+                <i class="bi bi-chevron-up me-3"></i>
+                {{review.num_upvotes|vote_count}}
+              </button>
+              {% else %}
+              <button class="upvote text-primary">
+                <i class="bi bi-chevron-up me-3"></i>
+                {{review.num_upvotes|vote_count}}
+              </button>
+              {% endif %}
+            </small>
+          </form>
+        </div>
+        
+        <div class="d-inline-block">
+          <form class="" action="{% url 'downvote' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="review_id" value="{{review.id}}">
+            <small>
+              {% if user not in review.downvotes.all %}
+              <button class="downvote text-muted">
+                <i class="bi bi-chevron-down me-3"></i>
+                {{review.num_downvotes|vote_count}}
+              </button>
+              {% else %}
+                <button class="downvote text-danger">
+                  <i class="bi bi-chevron-down me-3"></i>
+                  {{review.num_downvotes|vote_count}}
+                </button>
+              {% endif %}
+            </small>
+          </form>
+        </div>
+    
+        <div class="d-inline-block">
+          <a href="" class="nav-link d-inline-block">
+            <i class="bi bi-share"></i>
+          </a>
+        </div>
+    
+      </div>
+
+      <form class="comment-form bg-transparent border-0" action="/review/comment" method='post'>
+        {% csrf_token %}
+    
+        <input 
+          type="text"
+          name="review"
+          value="{{review.id}}"
+          hidden=true  
+        >
+        {{form.as_p}}
+
+        <button class="btn btn-primary bg-transparent text-primary">post</button>
+        
+      </form>
+      <div class="m-4">
+        <h5>Comments</h5>
+        {% for comment in comments %}
+          <div class="my-3 p-2 border-top">
+            {{comment.user}} commented... <br>
+            {{comment}}
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  
+  </div>
 
 {% endblock content %}

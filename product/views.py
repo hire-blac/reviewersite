@@ -62,10 +62,11 @@ def new_product(response):
             return redirect('new_product')
     else:    
         form = ProductAdminForm
-
+        # book = BookForm
     context = {
         'title': 'New Product',
         'form': form,
+        # 'book': book
     }
 
     return render(response, 'product/new-product.html', context)

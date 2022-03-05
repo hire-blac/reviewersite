@@ -12,6 +12,7 @@ class Review(models.Model):
     review = models.CharField(max_length=200)
     upvotes = models.ManyToManyField(User, default=None, blank=True, related_name='upvote')
     downvotes = models.ManyToManyField(User, default=None, blank=True, related_name='downvote')
+    comments = models.ManyToManyField(User, default=None, blank=True, related_name='comments', unique=False)
     created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
@@ -24,12 +25,17 @@ class Review(models.Model):
     @property
     def num_downvotes(self):
         return self.downvotes.all().count()
+
+    @property
+    def num_comments(self):
+        return self.comments.all().count()
     
 
 VOTE_CHOICES = {
     ('Upvote', 'Upvote'),
     ('Downvote', 'Downvote')
 }
+
 
 class Vote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -38,3 +44,16 @@ class Vote(models.Model):
     
     def __str__(self):
         return str(self.review) 
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="comment", null=True)
+    comment = models.CharField(max_length=200)
+    created = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-created']
+
+    def __str__(self):
+        return str(self.comment) 
