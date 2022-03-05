@@ -22,7 +22,7 @@ class ProductAdminForm(BaseDynamicEntityForm):
         fields['author'].widget.attrs = {'class': 'book', 'placeholder':'Author name'}
         fields['isbn'].widget.attrs = {'class': 'book', 'placeholder':'Book ISBN'}
         fields['year'].widget.attrs = {'class': 'car music book', 'placeholder':'Year released'}
-        fields['category-name'].widget.attrs = {'class': 'others', 'placeholder':'Type Category'}
+        fields['category-name'].widget.attrs = {'class': 'others', 'placeholder':'Category name'}
 
     class Meta:
         model = Product
