@@ -15,15 +15,15 @@ category.change(function(){
   switch (cat) {
     case '1':
       console.log($(this).val());
-      $('.many-attributes .book').show();
+      $('.many-attributes .music').show();
       break;
     case '2':
       $('.many-attributes .car').show();
       break;
-    case '3':
-      $('.many-attributes .music').show();
+    case '34':
+      $('.many-attributes .book').show();
       break;
-    case '4':
+    case '35':
       $('.many-attributes .others').show();
       break;
   }
