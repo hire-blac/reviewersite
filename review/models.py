@@ -1,6 +1,8 @@
 from django.db import models
 from accounts.models  import CustomUser as User
 from product.models import Product
+from django.urls import reverse
+
 
 # Create your models here.
 
@@ -17,6 +19,9 @@ class Review(models.Model):
 
     def __str__(self):
         return self.review
+
+    def get_absolute_url(self):
+        return reverse('review', kwargs={'id': self.pk})
 
     @property
     def num_upvotes(self):
