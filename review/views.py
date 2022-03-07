@@ -12,7 +12,7 @@ from product.models import Product
 def review(response, id):
     review = Review.objects.get(id=id)
     comments = review.comment.all()
-    comment_count = review.comment.all().count()
+    comment_count = comments.count()
     form = NewComment
 
     context = {
@@ -129,7 +129,7 @@ def new_comment(response):
 
             # add comment to review
             review.comment.add(comment)
-
+            
             return HttpResponseRedirect(review.get_absolute_url())
     else:
         form = NewComment

@@ -54,6 +54,7 @@ def follow(response, id):
     user = response.user
     following_user = CustomUser.objects.get(id=id)
     UserFollowing.objects.create(user=user, following_user=following_user)
+    
     return HttpResponseRedirect(following_user.get_absolute_url())
 
 @login_required(login_url='/accounts/login/')
@@ -61,6 +62,7 @@ def unfollow(response, id):
     user = response.user
     following_user = CustomUser.objects.get(id=id)
     UserFollowing.objects.filter(user=user, following_user=following_user).delete()
+    
     return HttpResponseRedirect(following_user.get_absolute_url())
 
 

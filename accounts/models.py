@@ -10,7 +10,7 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
-    
+        
     def get_absolute_url(self):
         return reverse('user_profile', kwargs={'id': self.pk})
 
@@ -37,6 +37,7 @@ class UserProfile(models.Model):
 
     def __str__(self) -> str:
         return (self.user.username)
+
     
 class UserFollowing(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='following')
