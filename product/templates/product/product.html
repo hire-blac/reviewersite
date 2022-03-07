@@ -11,14 +11,6 @@
     <h5>{{product.category}}</h5>
     <p>{{product.eav.model}}</p>
     <p>{{product.eav.year}}</p>
-
-    {% load my_filters %}
-
-    {% load my_filters %}
-
-    {% for k,v in reviews|review_stats %}
-      <p>{{k}} = {{v}}</p>
-    {% endfor %}
    
     <p>
       {% if user.is_authenticated %}

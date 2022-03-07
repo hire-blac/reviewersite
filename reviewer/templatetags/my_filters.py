@@ -23,21 +23,3 @@ def vote_count(votes):
     else:
         return f'{votes}'
         
-@register.filter(name='review_stats')
-def length(reviews):
-    print(reviews)
-    stats = {'5 stars':0, '4 stars':0, '3 stars':0, '2 stars':0, '1 star':0}
-    if reviews:
-        for review in reviews:
-            if review.rating == 1:
-                stats['1 star'] += 1
-            elif review.rating == 2:
-                stats['2 stars'] += 1 
-            elif review.rating == 3:
-                stats['3 stars'] += 1 
-            elif review.rating == 4:
-                stats['4 stars'] += 1 
-            elif review.rating == 5:
-                stats['5 stars'] += 1
-
-    return stats.items()

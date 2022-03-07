@@ -17,7 +17,7 @@ def product(response, id):
         'reviews': reviews,
         'form': form
         }
-        
+
     return render(response, 'product/product.html', context)
 
 
