@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from . forms import CreateNewReview, NewComment
@@ -11,7 +12,7 @@ from product.models import Product
 def review(response, id):
     review = Review.objects.get(id=id)
     comments = review.comment.all()
-    comment_count = review.comment.all().count()
+    comment_count = comments.count()
     form = NewComment
 
     context = {
@@ -48,8 +49,7 @@ def upvote(response):
             vote.value = 'Upvote'
         vote.save()
 
-    print('Liked')
-    return redirect('index')
+    return HttpResponseRedirect(review.get_absolute_url())
 
 # downvote a review
 @login_required(login_url='/accounts/login/')
@@ -74,8 +74,7 @@ def downvote(response):
             vote.value = 'Downvote'
         vote.save()
         
-    print('Unliked')
-    return redirect('index')
+    return HttpResponseRedirect(review.get_absolute_url())
 
 # create a new review
 @login_required(login_url='/accounts/login/')
@@ -130,7 +129,8 @@ def new_comment(response):
 
             # add comment to review
             review.comment.add(comment)
-            return redirect('index')
+            
+            return HttpResponseRedirect(review.get_absolute_url())
     else:
         form = NewComment
         context = {

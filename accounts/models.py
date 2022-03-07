@@ -1,4 +1,4 @@
-from dataclasses import fields
+from django.urls import reverse
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
@@ -10,6 +10,9 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+        
+    def get_absolute_url(self):
+        return reverse('user_profile', kwargs={'id': self.pk})
 
     
 class UserProfile(models.Model):
@@ -34,6 +37,7 @@ class UserProfile(models.Model):
 
     def __str__(self) -> str:
         return (self.user.username)
+
     
 class UserFollowing(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='following')
