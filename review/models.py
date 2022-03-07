@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.db import models
 from accounts.models  import CustomUser as User
 from product.models import Product
@@ -30,6 +31,8 @@ class Review(models.Model):
     def num_comments(self):
         return self.comments.all().count()
     
+    def get_absolute_url(self):
+        return reverse('review_details', kwargs={'id': self.pk})
 
 VOTE_CHOICES = {
     ('Upvote', 'Upvote'),

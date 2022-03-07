@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from accounts.forms import EditProfileForm
@@ -53,14 +54,14 @@ def follow(response, id):
     user = response.user
     following_user = CustomUser.objects.get(id=id)
     UserFollowing.objects.create(user=user, following_user=following_user)
-    return redirect('/')
+    return HttpResponseRedirect(following_user.get_absolute_url())
 
 @login_required(login_url='/accounts/login/')
 def unfollow(response, id):
     user = response.user
     following_user = CustomUser.objects.get(id=id)
     UserFollowing.objects.filter(user=user, following_user=following_user).delete()
-    return redirect('/')
+    return HttpResponseRedirect(following_user.get_absolute_url())
 
 
 def user_profile(response, id):

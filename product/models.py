@@ -1,4 +1,5 @@
-from unicodedata import category
+import imp
+from django.urls import reverse
 from django.db import models
 import eav
 from eav.models import Attribute
@@ -19,6 +20,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('product_details', kwargs={'id': self.pk})
 
 
 eav.register(Product)
