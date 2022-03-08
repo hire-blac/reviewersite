@@ -22,6 +22,20 @@ def vote_count(votes):
         return f'{count:.2f}K'
     else:
         return f'{votes}'
+       
+@register.filter(name='comment_count')
+def vote_count(review):
+    comment_count = review.count()
+    if comment_count == 0:
+        return ''
+    elif comment_count >= 1000000:
+        count = comment_count / 1000000
+        return f'{count:.2f}M'
+    elif comment_count >= 1000:
+        count = comment_count / 1000
+        return f'{count:.2f}K'
+    else:
+        return f'{comment_count}'
         
 @register.filter(name='review_stats')
 def length(reviews):

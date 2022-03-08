@@ -12,14 +12,12 @@ from product.models import Product
 def review(response, id):
     review = Review.objects.get(id=id)
     comments = review.comment.all()
-    comment_count = comments.count()
     form = NewComment
 
     context = {
         'title': 'Review',
         'review':review,
         'comments': comments,
-        'comment_count': comment_count,
         'form': form
         }
 

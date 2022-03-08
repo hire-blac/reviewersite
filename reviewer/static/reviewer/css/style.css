@@ -1,5 +1,6 @@
 body {
   background: #F8F7F7;
+  font-size: 15px;
 }
 @keyframes blinker {
   from {opacity: 1;}
@@ -146,13 +147,13 @@ a.land-butt {
 }
 
 /* Comment Buttons Styles */
-.vote a.comment-button {
+.vote a.comment {
   border: none;
   background: none;
   padding: 3px 12px;
   border-radius: 10px;
 }
-.vote a.comment-button:hover {
+.vote a.comment:hover {
   background: rgba(115, 152, 233, 0.3);
 }
 
