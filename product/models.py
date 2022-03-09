@@ -17,6 +17,7 @@ class Category(models.Model):
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='Category', verbose_name='Select a Category')
     name = models.CharField(max_length=200, verbose_name='Name/Title')
+    image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.name

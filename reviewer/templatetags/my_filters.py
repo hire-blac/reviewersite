@@ -25,19 +25,22 @@ def _count(elements):
         
 @register.filter(name='review_stats')
 def length(reviews):
-    print(reviews)
+    total_review = reviews.count()
+    star_counts = {'1 star': 0, '2 stars': 0, '3 stars': 0, '4 stars': 0, '5 stars': 0}
     stats = {'5 stars':0, '4 stars':0, '3 stars':0, '2 stars':0, '1 star':0}
     if reviews:
         for review in reviews:
             if review.rating == 1:
-                stats['1 star'] += 1
+                star_counts['1 star'] += 1
             elif review.rating == 2:
-                stats['2 stars'] += 1 
+                star_counts['2 stars'] += 1 
             elif review.rating == 3:
-                stats['3 stars'] += 1 
+                star_counts['3 stars'] += 1 
             elif review.rating == 4:
-                stats['4 stars'] += 1 
+                star_counts['4 stars'] += 1 
             elif review.rating == 5:
-                stats['5 stars'] += 1
-
+                star_counts['5 stars'] += 1
+    for k, v in star_counts.items():
+        percentage = (v / total_review) * 100
+        stats[k] = str(percentage)
     return stats.items()

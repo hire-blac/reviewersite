@@ -3,11 +3,11 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block content %}
-
+<h4>Product details</h4>
 <div class="row p-3">
 
   <div class="col-md-4 border-end">
-    <h3>{{product.name}}</h3>
+    <h5>{{product.name}}</h5>
     <h5>{{product.category}}</h5>
     <p>{{product.eav.model}}</p>
     <p>{{product.eav.year}}</p>
@@ -17,14 +17,17 @@
     {% load my_filters %}
 
     {% for k,v in reviews|review_stats %}
-      <p>{{k}} = {{v}}</p>
+      <p> 
+        <progress id="progress-bar" value={{v}} max="100"></progress>
+        <label for="progress-bar">{{k}}</label>
+      </p>
     {% endfor %}
-   
+    
     <p>
       {% if user.is_authenticated %}
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
-          Write a review
+          Review this product
         </button>
       {% else %}
         <b>
@@ -36,7 +39,7 @@
 
   <div class="col-md-8 px-4">
       
-    <h3>Reviews</h3>
+    <h5>Reviews</h5>
     {% if reviews %}
       {% for review in reviews %}
         {% include 'review/review-link-2.html' %}

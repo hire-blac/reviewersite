@@ -93,7 +93,8 @@ def new_review(response):
                 review=rev['review'])
             review.save()
             response.user.review.add(review)
-            return redirect('index')
+
+            return HttpResponseRedirect(product.get_absolute_url())
     else:    
         form = CreateNewReview
 
