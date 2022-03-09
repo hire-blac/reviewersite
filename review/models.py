@@ -26,10 +26,6 @@ class Review(models.Model):
     @property
     def num_downvotes(self):
         return self.downvotes.all().count()
-
-    @property
-    def num_comments(self):
-        return self.comments.all().count()
     
     def get_absolute_url(self):
         return reverse('review_details', kwargs={'id': self.pk})

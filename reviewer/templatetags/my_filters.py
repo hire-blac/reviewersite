@@ -10,32 +10,18 @@ def stars(num):
 def length(follow):
     return len(follow)
 
-@register.filter(name='vote_count')
-def vote_count(votes):
-    if votes == 0:
+@register.filter(name='_count')
+def _count(elements):
+    if elements == 0:
         return ''
-    elif votes >= 1000000:
-        count = votes / 1000000
+    elif elements >= 1000000:
+        count = elements / 1000000
         return f'{count:.2f}M'
-    elif votes >= 1000:
-        count = votes / 1000
+    elif elements >= 1000:
+        count = elements / 1000
         return f'{count:.2f}K'
     else:
-        return f'{votes}'
-       
-@register.filter(name='comment_count')
-def vote_count(review):
-    comment_count = review.count()
-    if comment_count == 0:
-        return ''
-    elif comment_count >= 1000000:
-        count = comment_count / 1000000
-        return f'{count:.2f}M'
-    elif comment_count >= 1000:
-        count = comment_count / 1000
-        return f'{count:.2f}K'
-    else:
-        return f'{comment_count}'
+        return f'{elements}'
         
 @register.filter(name='review_stats')
 def length(reviews):

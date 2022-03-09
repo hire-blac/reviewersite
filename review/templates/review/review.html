@@ -33,7 +33,7 @@
         <div class="d-inline-block">
           <a href="" class="nav-link comment">
             <i class="bi bi-chat me-3"></i>
-            {{review.comment.all|comment_count}}  
+            {{review.comment.all.count|_count}}  
           </a>
           
         </div>
@@ -46,12 +46,12 @@
               {% if user not in review.upvotes.all %}
               <button class="upvote text-muted">
                 <i class="bi bi-chevron-up me-3"></i>
-                {{review.num_upvotes|vote_count}}
+                {{review.num_upvotes|_count}}
               </button>
               {% else %}
               <button class="upvote text-primary">
                 <i class="bi bi-chevron-up me-3"></i>
-                {{review.num_upvotes|vote_count}}
+                {{review.num_upvotes|_count}}
               </button>
               {% endif %}
             </small>
@@ -66,12 +66,12 @@
               {% if user not in review.downvotes.all %}
               <button class="downvote text-muted">
                 <i class="bi bi-chevron-down me-3"></i>
-                {{review.num_downvotes|vote_count}}
+                {{review.num_downvotes|_count}}
               </button>
               {% else %}
                 <button class="downvote text-danger">
                   <i class="bi bi-chevron-down me-3"></i>
-                  {{review.num_downvotes|vote_count}}
+                  {{review.num_downvotes|_count}}
                 </button>
               {% endif %}
             </small>

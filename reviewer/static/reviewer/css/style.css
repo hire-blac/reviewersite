@@ -147,13 +147,13 @@ a.land-butt {
 }
 
 /* Comment Buttons Styles */
-.vote a.comment {
+.vote a.comment-button {
   border: none;
   background: none;
   padding: 3px 12px;
   border-radius: 10px;
 }
-.vote a.comment:hover {
+.vote a.comment-button:hover {
   background: rgba(115, 152, 233, 0.3);
 }
 
