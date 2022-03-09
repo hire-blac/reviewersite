@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from accounts.forms import EditProfileForm
 
 from accounts.models import CustomUser, UserFollowing, UserProfile
-
+from review.forms import NewComment
 
 # Create your views here.
 
@@ -16,13 +16,15 @@ def my_profile(response):
     reviews = user.review.all().order_by('-created')
     following = user.following.all()
     followers = user.follower.all()
+    comment_form = NewComment
 
     context = {
         'title':'My Profile',
         'profile':my_profile,
         'reviews': reviews,
         'following': following,
-        'followers': followers
+        'followers': followers,
+        'comment_form': comment_form
         }
 
     return render(response, 'account/myprofile.html', context )
@@ -75,6 +77,7 @@ def user_profile(response, id):
     following = profile.user.following.all()
     followers = profile.user.follower.all()
     is_follower = False
+    comment_form = NewComment
 
     for follow in followers:
         if response.user == follow.user:
@@ -87,7 +90,8 @@ def user_profile(response, id):
         'reviews': reviews,
         'following': following,
         'followers': followers,
-        'is_follower': is_follower
+        'is_follower': is_follower,
+        'comment_form': comment_form
     }
 
     return render(response, 'account/userprofile.html', context)

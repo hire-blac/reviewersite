@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from product.models import Product
 from product.forms import ProductAdminForm
-from review.forms import CreateNewReview
+from review.forms import CreateNewReview, NewComment
 from review.models import Review
 
 # Create your views here.
@@ -11,10 +11,12 @@ def product(response, id):
     product = Product.objects.get(id=id)
     reviews = Review.objects.filter(product=id).order_by('-created')
     form = CreateNewReview
+    comment_form = NewComment
     context = {
         'title': 'Product Details',
         'product': product,
         'reviews': reviews,
+        'comment_form': comment_form,
         'form': form
         }
         
