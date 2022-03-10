@@ -5,7 +5,7 @@
 {% block content %}
 
   <div class="row p-3 profile-details">
-    <div class="col-md-4 p-3 rounded profile-card">
+    <div class="col-md-4 p-3 shadow-sm bg-white profile-card">
       <div class="profile-pic">
         <img src="{{profile.profile_pic.url}}" alt="">
       </div>
@@ -37,7 +37,7 @@
       <a href="/profile/edit" class="btn border-primary text-primary my-2 d-block">edit profile</a>
     </div>
 
-    <div class="col-md-8 px-4 profile-reviews">
+    <div class="col-md-7 px-2 profile-reviews">
 
       {% if reviews %}
         {% for review in reviews %}

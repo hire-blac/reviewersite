@@ -113,23 +113,25 @@ a.land-butt {
 }
 
 /* Profile Styles */
-.profile-details {
+
+/* .profile-details {
   position: relative;
-}
+} */
 .profile-card {
-  position: fixed;
-  top: auto;
+  /* position: fixed; */
+  /* top: auto;
   left: auto;
   opacity: 1;
-  z-index: 1;
+  z-index: 1; */
+  border-radius: 10px;
   margin: 0 20px;
-  background-color: white;
+  height: fit-content;
 }
-.profile-reviews {
+/* .profile-reviews {
   position: relative;
   top: auto;
   left: 360px;
-}
+} */
 .profile-pic {
   width: 80px;
   height: 80px;

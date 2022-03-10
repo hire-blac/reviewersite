@@ -4,30 +4,23 @@
 
 {% block content %}
 
-  <div class="row p-3">
-
-    <div class="col-md-4 border-end">
+  <div class="row p-3 profile-details">
+    <div class="col-md-4 p-3 shadow-sm bg-white profile-card">
       <div class="profile-pic">
         <img src="{{profile.profile_pic.url}}" alt="">
       </div>
 
       <div class="text-center">
         <p>
-          <h4>{{profile.first_name}} {{profile.last_name}}</h4>
+          <h5>{{profile.first_name}} {{profile.last_name}}</h5>
         </p>
         <p>
-          <b>{{profile.user.email}}</b>
-        </p>
-        <p>
-          <b>About me: </b><br>
           {{profile.about_me}}
         </p>
       </div>
 
-      <div class="followings">
-        <img src="/static/images/people.svg" alt="">
-
-        <div class="d-flex justify-content-evenly border-bottom py-1 text-center">
+      <div class="followings mt-1">
+        <div class="d-flex justify-content-evenly py-1 text-center">
 
           <div>
             <a href="" class="nav-link"><b>Following</b></a>
@@ -39,17 +32,18 @@
           </div>
         </div>
 
-      </div>
+        {% if is_follower %}
+          <a href="/profile/{{profile.user.id}}/unfollow" class="btn btn-danger bg-transparent text-danger my-1 d-block">Unfollow</a>
+        {% else %}
+          <a href="/profile/{{profile.user.id}}/follow" class="btn btn-primary bg-transparent text-primary my-1 d-block">Follow</a>
+        {% endif %}
 
-      {% if is_follower %}
-        <a href="/profile/{{profile.user.id}}/unfollow" class="btn btn-danger bg-transparent text-danger my-5 d-block">Unfollow</a>
-      {% else %}
-        <a href="/profile/{{profile.user.id}}/follow" class="btn btn-primary bg-transparent text-primary my-5 d-block">Follow</a>
-      {% endif %}
+        </div>
 
     </div>
 
-    <div class="col-md-8 px-4">
+    <div class="col-md-7 px-2 profile-reviews">
+
       {% if reviews %}
         {% for review in reviews %}
           {% include 'review/review-link-3.html' %}
@@ -57,6 +51,7 @@
       {% else %}
         <h4 class="text-center">No reviews yet</h4>
       {% endif %}
+
     </div>
 
   </div>
