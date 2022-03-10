@@ -39,13 +39,12 @@
 
   <div class="col-md-8 px-4">
       
-    <h5>Reviews</h5>
     {% if reviews %}
       {% for review in reviews %}
         {% include 'review/review-link-2.html' %}
       {% endfor %}
     {% else %}
-      <p>No reviews for {{product.name}}</p>
+      <h5>No reviews for {{product.name}}</h5>
     {% endif %}
 
   </div>
