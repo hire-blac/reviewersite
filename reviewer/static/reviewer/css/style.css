@@ -25,6 +25,7 @@ body {
 }
 nav {
   display: flex;
+  color: #2564B0;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
@@ -42,9 +43,14 @@ nav ul li {
 nav a {
   text-decoration: none;
 }
+/* .navbar-brand img {
+  width: 50px;
+  height: 50px;
+} */
 .dropdown .nav-link img {
   width: 25px;
   height: 25px;
+  color: #2564B0;
 }
 .content {
   width: 800px;
