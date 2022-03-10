@@ -28,7 +28,7 @@ nav {
   color: #2564B0;
   justify-content: space-between;
   align-items: center;
-  padding: 0 0 0 40px;
+  padding: 0 20px;
   margin: 0 0 20px 0;
 }
 nav ul {
@@ -200,6 +200,9 @@ a.land-butt {
 
 @media screen and (min-width: 780px) {
   
+nav {
+  padding: 0 0 0 40px;
+}
   .bi-search {
     display: inline-block;
   }
