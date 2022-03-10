@@ -93,6 +93,25 @@ a.land-butt {
   overflow: hidden;
 }
 
+/* Product Styles */
+.product {
+  height: fit-content;
+}
+.product-details {
+  display: flex;
+  justify-content: left;
+}
+.product-image {
+  margin-right: 20px;
+}
+.product-image img {
+  width: 120px;
+  height: 120px;
+}
+.stats {
+  margin: 20px 0;
+}
+
 /* Profile Styles */
 .profile-details {
   position: relative;

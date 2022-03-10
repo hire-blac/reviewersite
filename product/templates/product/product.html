@@ -6,23 +6,28 @@
 <h4>Product details</h4>
 <div class="row p-3">
 
-  <div class="col-md-4 border-end">
-    <h5>{{product.name}}</h5>
-    <h5>{{product.category}}</h5>
-    <p>{{product.eav.model}}</p>
-    <p>{{product.eav.year}}</p>
+  <div class="col-md-4 shadow-sm p-4 bg-white rounded product">
+    <div class="product-details">
+      <div class="product-image">
+        <img src="/static/images/Icons/image-add.svg" alt="" srcset="">
+      </div>
+      <div class="product-name pt-3">
+        <p><b>{{product.name}}</b><br>
+          {{product.category}}
+        </p>
+      </div>
+    </div>
 
     {% load my_filters %}
+    <div class="stats">
+      {% for k,v in reviews|review_stats %}
+        <div class=""> 
+          <progress id="progress-bar" value={{v}} max="100"></progress>
+          <label for="progress-bar">{{k}}</label>
+        </div>
+      {% endfor %}
+    </div>
 
-    {% load my_filters %}
-
-    {% for k,v in reviews|review_stats %}
-      <p> 
-        <progress id="progress-bar" value={{v}} max="100"></progress>
-        <label for="progress-bar">{{k}}</label>
-      </p>
-    {% endfor %}
-    
     <p>
       {% if user.is_authenticated %}
         <!-- Button trigger modal -->
