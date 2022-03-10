@@ -4,18 +4,20 @@
 
 {% block content %}
 
-  <div class="border rounded-3 bg-white my-3 p-3">
+  <div class="shadow-sm rounded-3 bg-white my-3 p-3">
 
-    <div class="">
-      <small >
+    <div class="d-flex justify-content-start">
+      <div class="review-user-image">
+        <img src="{{review.user.userprofile.profile_pic.url}}" alt="">
+      </div>
           <a class="text-decoration-none" href="/profile/{{review.user.id}}">{{review.user}}</a> reviewed 
           <a class="" href="/product/{{review.product.id}}">{{review.product}}</a>
       </small>
     </div>
   
-    <div class="ms-4 me-2">
+    <div class="ms-5 me-1">
   
-      <div class="my-2">
+      <div class="my-1">
   
         {% load my_filters %}
   

@@ -17,22 +17,19 @@
 
   <div class="row">
 
+    <h4>Recent Reviews</h4>
+
     <div class="col-md-8">
-      <h4>Recent Reviews</h4>
       {% for review in reviews %}
         {% include 'review/review-link.html' %}
       {% endfor %}
     </div>
 
-    <div class="col-md-1">
-
-    </div>
-
-    <div class="col-md-3">
-      <div class="trending-reviews border">
+    <div class="col-md-4">
+      <div class="trending-reviews p-3 shadow-sm bg-white rounded">
         <h5>Trending</h5>
       </div>
-      <div class="hot-reviews border">
+      <div class="hot-reviews p-3 shadow-sm bg-white rounded">
         <h5>Hot Reviews</h5>
       </div>
     </div>

@@ -28,9 +28,8 @@ nav {
   color: #2564B0;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
-  margin: 20px 0;
+  padding: 0 0 0 40px;
+  margin: 0 0 20px 0;
 }
 nav ul {
   list-style-type: none;
@@ -43,20 +42,19 @@ nav ul li {
 nav a {
   text-decoration: none;
 }
-/* .navbar-brand img {
-  width: 50px;
-  height: 50px;
-} */
+.navbar-brand img {
+  height: 30px;
+}
 .dropdown .nav-link img {
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   color: #2564B0;
+  border-radius: 15px;
 }
 .content {
   width: 800px;
   margin: 20px auto;
   padding: 0 20px;
-  border: solid 1px #ccc;
 }
 .navbar-nav {
   background: #888;
@@ -114,24 +112,11 @@ a.land-butt {
 
 /* Profile Styles */
 
-/* .profile-details {
-  position: relative;
-} */
 .profile-card {
-  /* position: fixed; */
-  /* top: auto;
-  left: auto;
-  opacity: 1;
-  z-index: 1; */
   border-radius: 10px;
   margin: 0 20px;
   height: fit-content;
 }
-/* .profile-reviews {
-  position: relative;
-  top: auto;
-  left: 360px;
-} */
 .profile-pic {
   width: 80px;
   height: 80px;
@@ -147,16 +132,9 @@ a.land-butt {
   width: 30px;
   margin: 0 auto;
 }
-.trending-reviews {
-  height: 200px;
+.trending-reviews, .hot-reviews {
+  height: 350px;
   margin-bottom: 30px;
-  
-}
-
-.hot-reviews {
-  height: 200px;
-  margin-bottom: 30px;
-  
 }
 
 /* Voting Buttons Styles */
@@ -184,6 +162,7 @@ a.land-butt {
   background: rgba(115, 152, 233, 0.3);
 }
 
+/* Comment Form stlyes */
 .comment-form textarea {
   margin-top: 10px;
   height: 90px;
@@ -193,6 +172,14 @@ a.land-butt {
 }
 .comment-form label {
   display: none;
+}
+
+/* Review Card Styles */
+.review-user-image img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  margin-right: 10px;
 }
 
 @media screen and (min-width: 500px) {

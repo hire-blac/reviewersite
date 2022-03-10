@@ -1,7 +1,10 @@
 
 <div class="shadow-sm rounded-3 bg-white mb-3 p-3">
 
-  <div class="">
+  <div class="d-flex justify-content-start">
+    <div class="review-user-image">
+      <img src="{{review.user.userprofile.profile_pic.url}}" alt="">
+    </div>
     <small >
         Written by <a class="text-decoration-none" href="/profile/{{review.user.id}}">{{review.user}}</a>
     </small>
