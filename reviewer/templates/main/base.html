@@ -132,9 +132,73 @@
     {% endblock content %}
     
   </div>
+
+  <footer class="bg-white mt-4">
+    <div class="col-md-9 mx-auto p-3 text-center">
+      <a href="" class="nav-link py-4">
+        <img src="/static/images/Reviewer logo files/SVG/Full Logo/24p/Reviewer full logo 24p_Brand blue.svg" alt="">
+      </a>
+      <ul class="list-inline">
+        <li class="list-inline-item">
+          <a href="" class="nav-link">Books</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="" class="nav-link">Movies</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="" class="nav-link">Music</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="" class="nav-link">Food</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="" class="nav-link">Electronics</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="" class="nav-link">Places</a>
+        </li>
+      </ul>
+
+      <ul class="list-inline">
+        <li class="list-inline-item">
+          <a href="" class="nav-link">About Reviewer</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="" class="nav-link">Terms of Use</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="" class="nav-link">Privacy Policy</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="" class="nav-link">Help</a>
+        </li>
+      </ul>
+
+      <ul class="list-inline">
+        <li class="list-inline-item">
+          <a href="" class="nav-link">
+            <img src="/static/images/Icons/facebook-circle.svg" alt="" srcset="">
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a href="" class="nav-link">
+            <img src="/static/images/Icons/instagram.svg" alt="">
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a href="" class="nav-link">
+            <img src="/static/images/Icons/twitter.svg" alt="">
+          </a>
+        </li>
+      </ul>
+
+      <p class="">
+        &copy; 2022 Reviewer. All rights reserved
+      </p>
+    </div>
+  </footer>
   
 </body>
-{% block footer %}
   {# Bootstrap js CDN #}
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
@@ -143,5 +207,5 @@
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     {# Local js #}
   <script src="{% static 'reviewer/js/script.js' %}"></script>
-{% endblock footer %}
+
 </html>
