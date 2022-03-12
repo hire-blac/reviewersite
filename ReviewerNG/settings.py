@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'reviewer.apps.ReviewerConfig',
     'django.contrib.sites',
+    'django.contrib.sitemaps',
 
     # 3rd party
     'allauth',

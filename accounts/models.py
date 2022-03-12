@@ -37,6 +37,9 @@ class UserProfile(models.Model):
 
     def __str__(self) -> str:
         return (self.user.username)
+        
+    def get_absolute_url(self):
+        return reverse('user_profile', kwargs={'id': self.pk})
 
     
 class UserFollowing(models.Model):
