@@ -11,7 +11,7 @@
         <img src="{{review.user.userprofile.profile_pic.url}}" alt="">
       </div>
           <a class="text-decoration-none" href="/profile/{{review.user.id}}">{{review.user}}</a> reviewed 
-          <a class="" href="/product/{{review.product.id}}">{{review.product}}</a>
+          <a class="" href="/product/{{review.product.slug}}">{{review.product}}</a>
       </small>
     </div>
   
@@ -27,7 +27,7 @@
       </div>
       
       <p class="review-body">
-        <a class="text-dark text-decoration-none" href="/review/{{review.id}}">{{review}}</a>
+        <a class="text-dark text-decoration-none" href="/review/{{review.product.slug}}/{{review.slug}}">{{review}}</a>
       </p>
     
       <div class="vote d-flex w-75 justify-content-between align-items-center">
@@ -106,7 +106,7 @@
         <h5>Comments</h5>
         {% for comment in comments %}
           <div class="my-3 p-2 border-top">
-            <a class="text-decoration-none" href="/profile/{{review.user.id}}">{{review.user}}</a><br>
+            <a class="text-decoration-none" href="/profile/{{review.user.userprofile.slug}}">{{review.user}}</a><br>
             {{comment}}
           </div>
         {% endfor %}
