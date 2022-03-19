@@ -21,7 +21,7 @@ class UserProfile(models.Model):
     last_name = models.CharField(default="person", max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True, blank=True)
     about_me = models.TextField(default="random information about me", null=True, blank=True)
-    profile_pic = models.ImageField(default="profile_pic.png", null=True, blank=True)
+    profile_pic = models.ImageField(default="audiw.jpg", null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     # create user profile after user has been created
