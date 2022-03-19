@@ -43,7 +43,7 @@
         <div class="d-inline-block">
           <form class="" action="{% url 'upvote' %}" method="POST">
             {% csrf_token %}
-            <input type="hidden" name="review_id" value="{{review.id}}">
+            <input type="hidden" name="slug" value="{{review.slug}}">
             <small>
               {% if user not in review.upvotes.all %}
               <button class="upvote text-muted">
@@ -63,7 +63,7 @@
         <div class="d-inline-block">
           <form class="" action="{% url 'downvote' %}" method="POST">
             {% csrf_token %}
-            <input type="hidden" name="review_id" value="{{review.id}}">
+            <input type="hidden" name="slug" value="{{review.slug}}">
             <small>
               {% if user not in review.downvotes.all %}
               <button class="downvote text-muted">
@@ -94,7 +94,7 @@
         <input 
           type="text"
           name="review"
-          value="{{review.id}}"
+          value="{{review.slug}}"
           hidden=true  
         >
         {{form.as_p}}
