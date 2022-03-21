@@ -9,8 +9,8 @@ from product.models import Product
 # Create your views here.
 
 # single review
-def review(response, id):
-    review = Review.objects.get(id=id)
+def review(response, slug1, slug):
+    review = Review.objects.get(slug=slug)
     comments = review.comment.all()
     form = NewComment
 
@@ -28,8 +28,8 @@ def review(response, id):
 def upvote(response):
     user = response.user
     if response.method == 'POST':
-        review_id = response.POST.get('review_id')
-        review = Review.objects.get(id=review_id)
+        slug = response.POST.get('slug')
+        review = Review.objects.get(slug=slug)
         if user not in review.upvotes.all():
             if user in review.downvotes.all():
                 review.downvotes.remove(user)
@@ -54,8 +54,8 @@ def upvote(response):
 def downvote(response):
     user = response.user
     if response.method == 'POST':
-        review_id = response.POST.get('review_id')
-        review = Review.objects.get(id=review_id)
+        slug = response.POST.get('slug')
+        review = Review.objects.get(slug=slug)
         if user not in review.downvotes.all():
             if user in review.upvotes.all():
                 review.upvotes.remove(user)
@@ -114,7 +114,7 @@ def new_comment(response):
             comm = form.cleaned_data
 
             # get review object
-            review = Review.objects.get(id=response.POST.get('review'))
+            review = Review.objects.get(slug=response.POST.get('review'))
 
             comment = Comment(
                 user=response.user,

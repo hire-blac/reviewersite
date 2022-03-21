@@ -41,6 +41,7 @@ def length(reviews):
             elif review.rating == 5:
                 star_counts['5 stars'] += 1
     for k, v in star_counts.items():
-        percentage = (v / total_review) * 100
-        stats[k] = str(percentage)
+        if total_review != 0:
+            percentage = (v / total_review) * 100
+            stats[k] = str(percentage)
     return stats.items()

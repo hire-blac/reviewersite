@@ -7,9 +7,9 @@ from review.forms import CreateNewReview, NewComment
 from review.models import Review
 
 # Create your views here.
-def product(response, id):
-    product = Product.objects.get(id=id)
-    reviews = Review.objects.filter(product=id).order_by('-created')
+def product(response, slug):
+    product = Product.objects.get(slug=slug)
+    reviews = Review.objects.filter(product=product.id).order_by('-created')
     form = CreateNewReview
     comment_form = NewComment
     context = {

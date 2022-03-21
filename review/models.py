@@ -1,3 +1,4 @@
+from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.db import models
 from accounts.models  import CustomUser as User
@@ -11,6 +12,7 @@ class Review(models.Model):
     product = models.ForeignKey(Product, null=True, on_delete=models.CASCADE)
     rating = models.IntegerField()
     review = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=30, null=True, unique=True)
     upvotes = models.ManyToManyField(User, default=None, blank=True, related_name='upvote')
     downvotes = models.ManyToManyField(User, default=None, blank=True, related_name='downvote')
     comments = models.ManyToManyField(User, default=None, blank=True, related_name='comments', unique=False)
@@ -18,6 +20,12 @@ class Review(models.Model):
 
     def __str__(self):
         return self.review
+
+    # overwrite save method
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.review)
+        return super().save(*args, **kwargs)
 
     @property
     def num_upvotes(self):
@@ -28,7 +36,7 @@ class Review(models.Model):
         return self.downvotes.all().count()
     
     def get_absolute_url(self):
-        return reverse('review_details', kwargs={'id': self.pk})
+        return reverse('review_details', kwargs={'slug': self.slug})
 
 VOTE_CHOICES = {
     ('Upvote', 'Upvote'),

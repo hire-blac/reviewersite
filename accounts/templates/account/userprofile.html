@@ -33,9 +33,9 @@
         </div>
 
         {% if is_follower %}
-          <a href="/profile/{{profile.user.id}}/unfollow" class="btn btn-danger bg-transparent text-danger my-1 d-block">Unfollow</a>
+          <a href="/profile/{{profile.user.userprofile.slug}}/unfollow" class="btn btn-danger bg-transparent text-danger my-1 d-block">Unfollow</a>
         {% else %}
-          <a href="/profile/{{profile.user.id}}/follow" class="btn btn-primary bg-transparent text-primary my-1 d-block">Follow</a>
+          <a href="/profile/{{profile.user.userprofile.slug}}/follow" class="btn btn-primary bg-transparent text-primary my-1 d-block">Follow</a>
         {% endif %}
 
       </div>

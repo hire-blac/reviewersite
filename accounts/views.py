@@ -52,27 +52,27 @@ def edit_profile(response):
 
 
 @login_required(login_url='/accounts/login/')
-def follow(response, id):
+def follow(response, slug):
     user = response.user
-    following_user = CustomUser.objects.get(id=id)
+    following_user = UserProfile.objects.get(slug=slug).user
     UserFollowing.objects.create(user=user, following_user=following_user)
     
-    return HttpResponseRedirect(following_user.get_absolute_url())
+    return HttpResponseRedirect(following_user.userprofile.get_absolute_url())
 
 @login_required(login_url='/accounts/login/')
-def unfollow(response, id):
+def unfollow(response, slug):
     user = response.user
-    following_user = CustomUser.objects.get(id=id)
+    following_user = UserProfile.objects.get(slug=slug).user
     UserFollowing.objects.filter(user=user, following_user=following_user).delete()
     
-    return HttpResponseRedirect(following_user.get_absolute_url())
+    return HttpResponseRedirect(following_user.userprofile.get_absolute_url())
 
 
-def user_profile(response, id):
-    if id == response.user.id:
+def user_profile(response, slug):
+    if slug == response.user.userprofile.slug:
         return redirect(my_profile)
 
-    profile = UserProfile.objects.get(id=id)
+    profile = UserProfile.objects.get(slug=slug)
     reviews = profile.user.review.all().order_by('-created')
     following = profile.user.following.all()
     followers = profile.user.follower.all()
