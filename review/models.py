@@ -36,7 +36,7 @@ class Review(models.Model):
         return self.downvotes.all().count()
     
     def get_absolute_url(self):
-        return reverse('review_details', kwargs={'slug': self.slug})
+        return reverse('review_details', kwargs={'slug1': self.product.slug, 'slug': self.slug})
 
 VOTE_CHOICES = {
     ('Upvote', 'Upvote'),
@@ -63,4 +63,18 @@ class Comment(models.Model):
         ordering = ['-created']
 
     def __str__(self):
-        return str(self.comment) 
+        return str(self.comment)
+
+
+class Reply(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="reply")
+    reply = models.CharField(max_length=200)
+    created = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-created']
+
+    def __str__(self):
+        return str(self.reply)
+        

@@ -77,7 +77,7 @@ $('.comment-box').hide()
 // event handler for comment button to toggle comment form
 $('.comment-button').on('click', function () {
   // find parent div of (this)element with class review
-  var $vn = $(this.closest('.review'))
+  var $vn = $(this.closest('.drop'))
 
   // find child element with class comment-box
   var comment = $vn.find('.comment-box')

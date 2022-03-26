@@ -7,4 +7,5 @@ urlpatterns = [
     path('upvote', views.upvote, name='upvote'),
     path('downvote', views.downvote, name='downvote'),
     path('comment', views.new_comment, name='new_comment'),
+    path('reply', views.new_reply, name='new_reply'),
 ]

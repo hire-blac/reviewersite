@@ -7,3 +7,6 @@ class CreateNewReview(forms.Form):
 class NewComment(forms.Form):
 	comment = forms.CharField(widget=forms.Textarea, initial='Write a comment...')
 
+class NewReply(forms.Form):
+	reply = forms.CharField(widget=forms.Textarea, initial='reply to this comment...')
+

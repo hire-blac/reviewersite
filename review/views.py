@@ -1,8 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from . forms import CreateNewReview, NewComment
-from . models import Comment, Review, Vote
+from . forms import CreateNewReview, NewComment, NewReply
+from . models import Comment, Reply, Review, Vote
 from product.models import Product
 
 
@@ -13,12 +13,14 @@ def review(response, slug1, slug):
     review = Review.objects.get(slug=slug)
     comments = review.comment.all()
     form = NewComment
+    reply_form = NewReply
 
     context = {
         'title': 'Review',
         'review':review,
         'comments': comments,
-        'form': form
+        'form': form,
+        'reply_form': reply_form
         }
 
     return render(response, 'review/review.html', context )
@@ -123,17 +125,35 @@ def new_comment(response):
             )
             comment.save()
 
-            # # add user to review commenters
-            # review.comments.add(response.user)
-
             # add comment to review
             review.comment.add(comment)
             
             return HttpResponseRedirect(review.get_absolute_url())
-    else:
-        form = NewComment
-        context = {
-            "title": "Comment",
-            'form': form
-        }
-    return render(response, 'review/comment', context)
+            
+
+# create a new reply
+@login_required(login_url='/accounts/login/')
+def new_reply(response):
+    if response.method == "POST":
+        form = NewReply(response.POST)
+
+        if form.is_valid():
+            comm = form.cleaned_data
+
+            # get review object
+            comment = Comment.objects.get(id=response.POST.get('comment'))
+
+            reply = Reply(
+                user=response.user,
+                comment=comment,
+                reply=comm['reply']
+            )
+            reply.save()
+
+            # # add user to review commenters
+            # review.comments.add(response.user)
+
+            # add comment to review
+            comment.reply.add(reply)
+            
+            return HttpResponseRedirect(comment.review.get_absolute_url())
