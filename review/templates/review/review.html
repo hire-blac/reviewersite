@@ -115,8 +115,7 @@
               <div class="review-user-image">
                 <img src="{{review.user.userprofile.profile_pic.url}}" alt="">
               </div>
-                  <a class="text-decoration-none" href="/profile/{{review.user.userprofile.slug}}">{{review.user}} </a> reviewed 
-                  <a class="" href="/product/{{review.product.slug}}">{{review.product}}</a>
+                  <a class="text-decoration-none" href="/profile/{{review.user.userprofile.slug}}">{{review.user}}</a>
               </small>
             </div>
 
@@ -127,7 +126,8 @@
               <!-- Reply Button-->
               <div class="d-inline-block">
                 <a class="nav-link comment-button">
-                  {{comment.reply.all.count|_count}} Replies
+                  <i class="bi bi-chat me-3"></i>
+                  {{comment.reply.all.count|_count}}
                 </a>
                 
               </div>
