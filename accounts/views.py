@@ -69,8 +69,9 @@ def unfollow(response, slug):
 
 
 def user_profile(response, slug):
-    if slug == response.user.userprofile.slug:
-        return redirect(my_profile)
+    if not response.user.is_anonymous:
+        if slug == response.user.userprofile.slug:
+            return redirect(my_profile)
 
     profile = UserProfile.objects.get(slug=slug)
     reviews = profile.user.review.all().order_by('-created')
