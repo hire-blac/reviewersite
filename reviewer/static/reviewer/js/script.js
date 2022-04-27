@@ -3,31 +3,60 @@ const endpoint = "/product/"
 const delay_in_ms = 700
 let scheduled_function = false
 const product_input_div = $('#form-input-replacable-content')
+const prodAttribEndpoint = "/product/categories/";
+const productCategory = document.querySelector("#category");
+const catAttributes = $(".attribs");
 
-// hide all input fields for new product
-$('.many-attributes input').hide();
-
-const category = $('#id_category')
-category.change(function(){
-  const cat = $(this).val()
-  $('.many-attributes input').hide();
-
-  switch (cat) {
-    case '1':
-      console.log($(this).val());
-      $('.many-attributes .music').show();
-      break;
-    case '2':
-      $('.many-attributes .car').show();
-      break;
-    case '34':
-      $('.many-attributes .book').show();
-      break;
-    case '35':
-      $('.many-attributes .others').show();
-      break;
+// event listener for product category select
+productCategory.addEventListener("change", (e)=>{
+  const request_param = {
+    "category": e.target.value
   }
+
+  attrib_ajax_call(prodAttribEndpoint, request_param);
+
 })
+
+
+let attrib_ajax_call = function (endpoint, request_parameters) {
+
+  $.getJSON(endpoint, request_parameters)
+  .done(response => {
+    // fade out the catAttributes
+    catAttributes.fadeTo('slow', 0).promise().then(()=>{
+      // replace the html content
+      catAttributes.html(response["category_attributes"]);
+      // fade in the div with new content
+      catAttributes.fadeTo('slow', 1)
+
+    })
+  });
+}
+
+// // hide all input fields for new product
+// $('.many-attributes input').hide();
+
+// const category = $('#id_category')
+// category.change(function(){
+//   const cat = $(this).val()
+//   $('.many-attributes input').hide();
+
+//   switch (cat) {
+//     case '1':
+//       console.log($(this).val());
+//       $('.many-attributes .music').show();
+//       break;
+//     case '2':
+//       $('.many-attributes .car').show();
+//       break;
+//     case '34':
+//       $('.many-attributes .book').show();
+//       break;
+//     case '35':
+//       $('.many-attributes .others').show();
+//       break;
+//   }
+// })
 
 // search for product
 function search(element) {

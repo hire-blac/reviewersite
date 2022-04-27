@@ -4,11 +4,15 @@ from . forms import ProductAdminForm
 from eav.admin import BaseEntityAdmin
 
 
-class ProductAdmin(BaseEntityAdmin):
-    form = ProductAdminForm
+# class ProductAdmin(BaseEntityAdmin):
+#     form = ProductAdminForm
 
 
-# Register your models here.
+# # Register your models here.
 
-admin.site.register(Product, ProductAdmin)
+# admin.site.register(Product, ProductAdmin)
+# admin.site.register(Category)
 admin.site.register(Category)
+admin.site.register(Product)
+admin.site.register(ProductAttribute)
+admin.site.register(ProductAttribValue)

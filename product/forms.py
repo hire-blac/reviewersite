@@ -1,3 +1,4 @@
+from dataclasses import fields
 from django import forms
 from django.forms import ModelForm
 from . models import *
@@ -11,7 +12,7 @@ class ProductAdminForm(BaseDynamicEntityForm):
         super(ProductAdminForm, self).__init__(*args, **kwargs)
         fields = self.fields
 
-        fields['category'].widget.attrs = {'class': 'car', 'default':'Category'}
+        # fields['category'].widget.attrs = {'class': 'car', 'default':'Category'}
         fields['name'].widget.attrs = {'class': 'car music book others', 'placeholder':'Name/Title'}
         fields['model'].widget.attrs = {'class': 'car', 'placeholder':'Model'}
         fields['make'].widget.attrs = {'class': 'car', 'placeholder':'Make'}
@@ -23,6 +24,12 @@ class ProductAdminForm(BaseDynamicEntityForm):
         fields['isbn'].widget.attrs = {'class': 'book', 'placeholder':'Book ISBN'}
         fields['year'].widget.attrs = {'class': 'car music book', 'placeholder':'Year released'}
         fields['category-name'].widget.attrs = {'class': 'others', 'placeholder':'Category name'}
+
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+class NewProductForm(ModelForm):
 
     class Meta:
         model = Product

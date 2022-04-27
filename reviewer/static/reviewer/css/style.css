@@ -17,9 +17,6 @@ body {
 .bi-search {
   display: none;
 }
-.many-attributes label {
-  display: none;
-}
 .login input, .signup input {
   margin: 10px 0 20px;
 }
@@ -109,7 +106,9 @@ a.land-butt {
 .stats {
   margin: 20px 0;
 }
-
+label {
+  display: block;
+}
 /* Profile Styles */
 
 .profile-card {

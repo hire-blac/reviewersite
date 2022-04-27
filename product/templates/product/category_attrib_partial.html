@@ -1,0 +1,6 @@
+<div class="category-attributes">
+  {% for attrb in categoryAttributes %}
+    <label for="{{attrb}}">{{attrb}}</label>
+    <input type="text" name="{{attrb}}" id="{{attrb}}">
+  {% endfor %}
+</div>
