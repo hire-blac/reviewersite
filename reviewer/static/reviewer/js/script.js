@@ -4,33 +4,7 @@ const delay_in_ms = 700
 let scheduled_function = false
 const product_input_div = $('#form-input-replacable-content')
 const prodAttribEndpoint = "/product/categories/";
-const productCategory = document.querySelector("#category");
 const catAttributes = $(".attribs");
-
-// // hide all input fields for new product
-// $('.many-attributes input').hide();
-
-// const category = $('#id_category')
-// category.change(function(){
-//   const cat = $(this).val()
-//   $('.many-attributes input').hide();
-
-//   switch (cat) {
-//     case '1':
-//       console.log($(this).val());
-//       $('.many-attributes .music').show();
-//       break;
-//     case '2':
-//       $('.many-attributes .car').show();
-//       break;
-//     case '34':
-//       $('.many-attributes .book').show();
-//       break;
-//     case '35':
-//       $('.many-attributes .others').show();
-//       break;
-//   }
-// })
 
 // search for product
 function search(element) {
