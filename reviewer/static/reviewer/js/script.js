@@ -7,32 +7,6 @@ const prodAttribEndpoint = "/product/categories/";
 const productCategory = document.querySelector("#category");
 const catAttributes = $(".attribs");
 
-// event listener for product category select
-productCategory.addEventListener("change", (e)=>{
-  const request_param = {
-    "category": e.target.value
-  }
-
-  attrib_ajax_call(prodAttribEndpoint, request_param);
-
-})
-
-
-let attrib_ajax_call = function (endpoint, request_parameters) {
-
-  $.getJSON(endpoint, request_parameters)
-  .done(response => {
-    // fade out the catAttributes
-    catAttributes.fadeTo('slow', 0).promise().then(()=>{
-      // replace the html content
-      catAttributes.html(response["category_attributes"]);
-      // fade in the div with new content
-      catAttributes.fadeTo('slow', 1)
-
-    })
-  });
-}
-
 // // hide all input fields for new product
 // $('.many-attributes input').hide();
 
@@ -101,10 +75,11 @@ let ajax_call = function (endpoint, request_parameters) {
 }
 
 // hide every comment box
-$('.comment-box').hide()
+$('.comment-box').hide();
 
 // event handler for comment button to toggle comment form
 $('.comment-button').on('click', function () {
+  console.log("BOOOOOOOMMMMM");
   // find parent div of (this)element with class review
   var $vn = $(this.closest('.drop'))
 
@@ -117,3 +92,29 @@ $('.comment-button').on('click', function () {
     $('.comment-box').not($(this)).hide()
   })
 })
+
+
+// event listener for product category select
+productCategory.addEventListener("change", (e)=>{
+  const request_param = {
+    "category": e.target.value
+  }
+
+  attrib_ajax_call(prodAttribEndpoint, request_param);
+
+})
+
+let attrib_ajax_call = function (endpoint, request_parameters) {
+
+  $.getJSON(endpoint, request_parameters)
+  .done(response => {
+    // fade out the catAttributes
+    catAttributes.fadeTo('slow', 0).promise().then(()=>{
+      // replace the html content
+      catAttributes.html(response["category_attributes"]);
+      // fade in the div with new content
+      catAttributes.fadeTo('slow', 1)
+
+    })
+  });
+}
