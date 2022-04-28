@@ -79,7 +79,6 @@ $('.comment-box').hide();
 
 // event handler for comment button to toggle comment form
 $('.comment-button').on('click', function () {
-  console.log("BOOOOOOOMMMMM");
   // find parent div of (this)element with class review
   var $vn = $(this.closest('.drop'))
 
@@ -93,16 +92,15 @@ $('.comment-button').on('click', function () {
   })
 })
 
-
 // event listener for product category select
-productCategory.addEventListener("change", (e)=>{
+function selectProductCategory(elem){
   const request_param = {
-    "category": e.target.value
+    "category": elem.value
   }
 
   attrib_ajax_call(prodAttribEndpoint, request_param);
 
-})
+}
 
 let attrib_ajax_call = function (endpoint, request_parameters) {
 
