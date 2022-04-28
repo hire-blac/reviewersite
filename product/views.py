@@ -1,8 +1,9 @@
-from django.http.response import HttpResponse, JsonResponse
-from django.shortcuts import redirect, render
+from django.http import HttpResponseRedirect
+from django.http.response import JsonResponse
+from django.shortcuts import render
 from django.template.loader import render_to_string
-from product.models import Category, Product, ProductAttribute
-from product.forms import ProductAdminForm, NewProductForm
+from product.models import Category, Product, ProductAttribValue, ProductAttribute
+from product.forms import NewProductForm
 from review.forms import CreateNewReview, NewComment
 from review.models import Review
 
@@ -60,19 +61,45 @@ def new_product(response):
     categories = Category.objects.all()
     
     if response.method == 'POST':
-        #form = ProductAdminForm(response.POST)
-        #if form.is_valid():
-            #form.save()
-            #return redirect('new_product')
-        pass
+
+        form = NewProductForm(response.POST)
+        if form.is_valid():
+            # find category
+            cat = Category.objects.get(slug=form.data['category'])
+            # create new product
+            product = Product(
+                category=cat,
+                name=form.data['name'],
+                image=form.data['image'],
+            )
+            # save product
+            product.save()
+            
+            # loop through key,value pairs of form data queryset
+            for k,i in form.data.items():
+                # check if key == csrf token
+                if k == "csrfmiddlewaretoken" or k == 'category' or k == 'name' or k == 'image':
+                    continue
+                # find product attribute
+                attrib = ProductAttribute.objects.get(slug=k)
+                # create new value
+                val = ProductAttribValue(
+                    product=product,
+                    productAttribute=attrib,
+                    value=i
+                )
+                # save value
+                val.save()
+            
+            return HttpResponseRedirect(product.get_absolute_url())
+    
     else:    
-        form = ProductAdminForm
-        # book = BookForm
+        form = NewProductForm
+        
     context = {
         'title': 'New Product',
         'form': form,
         'categories': categories
-        # 'book': book
     }
 
     return render(response, 'product/new-product.html', context)
@@ -89,7 +116,6 @@ def attributes_search(response):
     }
     
     if response.is_ajax():
-        print(categoryAttributes)
         attribs = render_to_string(
             template_name='product/category_attrib_partial.html',
             context={ 'categoryAttributes': categoryAttributes }

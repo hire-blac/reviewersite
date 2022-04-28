@@ -2,21 +2,22 @@ from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.db import models
 import eav
+from reviewer.unique import unique_slug_generator
 
 
 # Create your models here.
 
 class Category(models.Model):
-    category_name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
     slug = models.SlugField(null=True, unique=True)
 
     def __str__(self):
-        return self.category_name
+        return self.name
     
     # overwrite save method
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.category_name)
+            self.slug = unique_slug_generator(self)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -24,7 +25,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='Category', verbose_name='Select a Category')
-    name = models.CharField(max_length=200, verbose_name='Name/Title')
+    name = models.CharField(max_length=200, verbose_name='Name')
     slug = models.SlugField(null=True, unique=True)
     image = models.ImageField(default="placeholder-image.jpg", null=True, blank=True)
 
@@ -34,7 +35,7 @@ class Product(models.Model):
     # overwrite save method
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            self.slug = unique_slug_generator(self)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -52,7 +53,7 @@ class ProductAttribute(models.Model):
     # overwrite save method
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            self.slug = unique_slug_generator(self)
         return super().save(*args, **kwargs)
 
     
