@@ -6,28 +6,32 @@
 <h4>Product details</h4>
 <div class="row p-3">
 
-  <div class="col-md-4 shadow-sm p-4 mb-4 bg-white rounded product">
+  <div class="col-md-5 shadow-sm p-4 mb-4 bg-white rounded product">
     <div class="product-details">
-      <div class="product-image">
+      <div class="product-image col-md-6">
         {% if product.image %}
           <img src="{{product.image.url}}" alt="" srcset="">
         {% else %}
           <img src="/static/images/placeholder-image.jpg" alt="" srcset="">
         {% endif %}
       </div>
-      <div class="product-name pt-3">
-        <p><b>{{product.name}}</b><br>
-          {{product.category}}
+      <div class="product-name col-md-6">
+        <p>
+          <b>{{product.name}}</b><br>
         </p>
+        Category: {{product.category}}<br/>
+        {% for val in productAttributesValues %}
+          {{val.productAttribute}}: {{val.value}}<br/>
+        {% endfor %}
       </div>
     </div>
 
     {% load my_filters %}
     <div class="stats">
       {% for k,v in reviews|review_stats %}
-        <div class=""> 
-          <progress id="progress-bar" value={{v}} max="100"></progress>
+        <div class="mb-2"> 
           <label for="progress-bar">{{k}}</label>
+          <progress id="progress-bar" value={{v}} max="100"></progress>
         </div>
       {% endfor %}
     </div>
@@ -46,7 +50,7 @@
     </p>
   </div>
 
-  <div class="col-md-8 px-md-4">
+  <div class="col-md-7 px-md-4">
       
     {% if reviews %}
       {% for review in reviews %}
