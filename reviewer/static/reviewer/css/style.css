@@ -107,10 +107,21 @@ a.land-butt {
   margin: 20px 0;
 }
 label {
+  margin-top: 10px;
   display: block;
 }
-/* Profile Styles */
+input[type="text"] {
+  border: solid 1.3px #0275d8;
+  padding: 5px;
+  border-radius: 5px;
+}
+input[type="text"]:focus-within {
+  border: solid 1.3px #0275d8;
+  padding: 5px;
+  border-radius: 5px;
+}
 
+/* Profile Styles */
 .profile-card {
   border-radius: 10px;
   height: fit-content;

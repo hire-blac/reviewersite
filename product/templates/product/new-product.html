@@ -4,25 +4,27 @@
 
 {% block content %}
 
-  <form action="" method="post">
-    {% csrf_token %}
-    <h4>Add new product</h4>
-
-    <label for="category">Category: </label>
-    <select name="category" id="category" required onchange=selectProductCategory(this) >
-      <option value="" selected disabled>Choose Product Category</option>
-      {% for cat in categories %}
-        <option value="{{cat.slug}}">{{cat}}</option>
-      {% endfor %}
-    </select>
-    
-    {{form}}
-
-    <div class="attribs">
-      {% include 'product/category_attrib_partial.html' %}
-    </div>
-
-    <button>Add product</button>
-  </form>
+  <div class="bg-white shadow-sm p-4">
+    <form class="col-6 mx-auto" action="" method="post">
+      {% csrf_token %}
+      <h4>Add new product</h4>
+  
+      <label for="category">Category: </label>
+      <select class="border-2 rounded-1 border-primary p-2" name="category" id="category" required onchange=selectProductCategory(this) >
+        <option value="" selected disabled>Choose Product Category</option>
+        {% for cat in categories %}
+          <option value="{{cat.slug}}">{{cat}}</option>
+        {% endfor %}
+      </select>
+      
+      {{form}}
+  
+      <div class="attribs">
+        {% include 'product/category_attrib_partial.html' %}
+      </div>
+  
+      <button class="btn btn-outline-primary my-3">Add product</button>
+    </form>
+  </div>
 
 {% endblock content %}
