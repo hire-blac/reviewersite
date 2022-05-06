@@ -6,6 +6,22 @@ body {
   from {opacity: 1;}
   to {opacity: 0;}
 }
+h1, h2, h3, h4, h5, h6 {
+  color: #2564B0;
+}
+.btn-primary, .bg-primary {
+  border-color: #2564B0;
+  background-color: #2564B0;
+  color: white;
+}
+.btm-outline-primary {
+  background-color: white;
+  border-color: #2564B0;
+  color: #2564B0;
+}
+.text-primary {
+  color: #2564B0;
+}
 .blink {
   text-decoration: blink;
   animation-name: blinker;
@@ -74,6 +90,9 @@ nav a {
   height: 100%;
   padding: 30px 20px;
   overflow: visible;
+}
+.overly h2 {
+  color: rgb(255, 255, 255);
 }
 a.land-butt {
   display: block;
