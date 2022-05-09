@@ -17,7 +17,7 @@ class Category(models.Model):
     # overwrite save method
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = unique_slug_generator(self)
+            self.slug = unique_slug_generator(self, self.name)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -35,7 +35,7 @@ class Product(models.Model):
     # overwrite save method
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = unique_slug_generator(self)
+            self.slug = unique_slug_generator(self, self.name)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -53,7 +53,7 @@ class ProductAttribute(models.Model):
     # overwrite save method
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = unique_slug_generator(self)
+            self.slug = unique_slug_generator(self, self.name)
         return super().save(*args, **kwargs)
 
     

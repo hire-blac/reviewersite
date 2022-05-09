@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.db import models
 from accounts.models  import CustomUser as User
 from product.models import Product
+from reviewer.unique import unique_slug_generator
 
 # Create your models here.
 
@@ -12,7 +13,7 @@ class Review(models.Model):
     product = models.ForeignKey(Product, null=True, on_delete=models.CASCADE)
     rating = models.IntegerField()
     review = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=30, null=True, unique=True)
+    slug = models.SlugField(null=True, unique=True)
     upvotes = models.ManyToManyField(User, default=None, blank=True, related_name='upvote')
     downvotes = models.ManyToManyField(User, default=None, blank=True, related_name='downvote')
     comments = models.ManyToManyField(User, default=None, blank=True, related_name='comments', unique=False)
@@ -24,7 +25,7 @@ class Review(models.Model):
     # overwrite save method
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.review)
+            self.slug = unique_slug_generator(self, self.review)
         return super().save(*args, **kwargs)
 
     @property
@@ -57,6 +58,7 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="comment", null=True)
     comment = models.CharField(max_length=200)
+    slug = models.SlugField(null=True, unique=True)
     created = models.DateTimeField(auto_now_add=True)
     
     class Meta:
@@ -65,11 +67,18 @@ class Comment(models.Model):
     def __str__(self):
         return str(self.comment)
 
+    # overwrite save method
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = unique_slug_generator(self, self.comment)
+        return super().save(*args, **kwargs)
+
 
 class Reply(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="reply")
     reply = models.CharField(max_length=200)
+    slug = models.SlugField(null=True, unique=True)
     created = models.DateTimeField(auto_now_add=True)
     
     class Meta:
@@ -77,4 +86,10 @@ class Reply(models.Model):
 
     def __str__(self):
         return str(self.reply)
+
+    # overwrite save method
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = unique_slug_generator(self, self.reply)
+        return super().save(*args, **kwargs)
         
