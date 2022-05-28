@@ -67,6 +67,18 @@ def unfollow(response, slug):
     
     return HttpResponseRedirect(following_user.userprofile.get_absolute_url())
 
+def followings(response, slug):
+    profile = UserProfile.objects.get(slug=slug)
+    following = profile.user.following.all()
+    followers = profile.user.follower.all()
+    context = {
+        'profile': profile,
+        'following': following,
+        'followers': followers,
+    }
+    
+    return render(response, 'account/following.html', context)
+
 
 def user_profile(response, slug):
     if not response.user.is_anonymous:

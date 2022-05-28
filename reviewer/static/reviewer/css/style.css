@@ -9,15 +9,30 @@ body {
 h1, h2, h3, h4, h5, h6 {
   color: #2564B0;
 }
+.content-box {
+  border: solid 1px #eee;
+  background-color: white;
+  padding: 15px;
+  box-shadow: 0 0 5px #dfdfdf;
+  border-radius: 4px;
+}
+textarea {
+  max-height: 120px;
+}
 .btn-primary, .bg-primary {
   border-color: #2564B0;
   background-color: #2564B0;
   color: white;
 }
-.btm-outline-primary {
+.btn-outline-primary {
   background-color: white;
   border-color: #2564B0;
   color: #2564B0;
+}
+.btn-outline-primary:hover {
+  background-color: #2564B0;
+  border-color: #2564B0;
+  color: white;
 }
 .text-primary {
   color: #2564B0;

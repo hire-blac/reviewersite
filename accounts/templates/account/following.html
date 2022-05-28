@@ -1,0 +1,47 @@
+{% extends 'main/base.html' %}
+{% block title %}Edit Profile{% endblock title %}
+
+{% block content %}
+
+  <a href="/profile/{{profile.slug}}" class="btn btn-outline-primary">Back to profile</a>
+  
+  <div class="col-md-10 bg-white rounded mx-auto my-4 p-4">
+
+    <div class="nav nav-tabs" id="myList" role="tablist">
+      <a class="nav-link active" data-bs-toggle="list" href="#home" role="tab">Followers</a>
+      <a class="nav-link" data-bs-toggle="list" href="#profile" role="tab">Following</a>
+    </div>
+    
+    <div class="tab-content">
+      <div class="tab-pane fade show active my-2" id="home" role="tabpanel">
+        
+        <ul class="list-unstyled">
+          {% for follower in followers %}
+            <li class="nav-item">
+              <a class="nav-link" href="/profile/{{follower.user.userprofile.slug}}">{{follower.user}}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="tab-pane fade my-2" id="profile" role="tabpanel">
+        
+        <ul class="list-unstyled">
+          {% for follow in following %}
+            <li class="nav-item">
+              <a class="nav-link" href="/profile/{{follow.user.userprofile.slug}}">{{follow.user}}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    
+    <script>
+      var firstTabEl = document.querySelector('#myTab a:last-child')
+      var firstTab = new bootstrap.Tab(firstTabEl)
+    
+      firstTab.show()
+    </script>
+    
+  </div>
+{% endblock content %}

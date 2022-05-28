@@ -25,6 +25,28 @@ def review(response, slug1, slug):
 
     return render(response, 'review/review.html', context )
 
+def edit_review(response, slug1, slug):
+    review = Review.objects.get(slug=slug)
+
+    # check user
+    if review.user == response.user:
+        context = {
+            'title': 'Edit review',
+            'review':review,
+        }
+        
+        if response.method == 'POST':
+            form_data = response.POST
+            review.rating = form_data['rating']
+            review.review = form_data['review']
+            review.save()
+
+            return HttpResponseRedirect(review.get_absolute_url())
+    else:
+        return HttpResponseRedirect(review.get_absolute_url())
+    
+    return render(response, 'review/edit-review.html', context )
+
 # # upvote a review
 @login_required(login_url='/accounts/login/')
 def upvote(response):

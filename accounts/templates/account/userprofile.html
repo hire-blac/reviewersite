@@ -23,19 +23,19 @@
         <div class="d-flex justify-content-evenly py-1 text-center">
 
           <div>
-            <a href="" class="nav-link"><b>Following</b></a>
+            <a href="/profile/{{profile.user.userprofile.slug}}/followings"  class="nav-link"><b>Following</b></a>
             <p>{{following|length}}</p>
           </div>
           <div>
-            <a href="" class="nav-link"><b>Followers</b></a>
+            <a href="/profile/{{profile.user.userprofile.slug}}/followings"  class="nav-link"><b>Followers</b></a>
             <p>{{followers|length}}</p>
           </div>
         </div>
 
         {% if is_follower %}
-          <a href="/profile/{{profile.user.userprofile.slug}}/unfollow" class="btn btn-danger bg-transparent text-danger my-1 d-block">Unfollow</a>
+          <a href="/profile/{{profile.user.userprofile.slug}}/unfollow" class="btn btn-outline-danger my-1 d-block">Unfollow</a>
         {% else %}
-          <a href="/profile/{{profile.user.userprofile.slug}}/follow" class="btn btn-primary bg-transparent text-primary my-1 d-block">Follow</a>
+          <a href="/profile/{{profile.user.userprofile.slug}}/follow" class="btn btn-outline-primary my-1 d-block">Follow</a>
         {% endif %}
 
       </div>

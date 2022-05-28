@@ -27,7 +27,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='Category', verbose_name='Select a Category')
     name = models.CharField(max_length=200, verbose_name='Name')
     slug = models.SlugField(null=True, unique=True)
-    image = models.ImageField(default="placeholder-image.jpg", null=True, blank=True)
+    image = models.ImageField(upload_to='products/',default="placeholder-image.jpg", null=True, blank=True)
 
     def __str__(self):
         return self.name

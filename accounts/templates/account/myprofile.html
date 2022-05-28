@@ -23,18 +23,18 @@
         <div class="d-flex justify-content-evenly py-1 text-center">
 
           <div>
-            <a href="" class="nav-link"><b>Following</b></a>
+            <a href="/profile/{{profile.user.userprofile.slug}}/followings" class="nav-link"><b>Following</b></a>
             <p>{{following|length}}</p>
           </div>
           <div>
-            <a href="" class="nav-link"><b>Followers</b></a>
+            <a href="/profile/{{profile.user.userprofile.slug}}/followings" class="nav-link"><b>Followers</b></a>
             <p>{{followers|length}}</p>
           </div>
         </div>
 
       </div>
 
-      <a href="/profile/edit" class="btn border-primary text-primary my-2 d-block">edit profile</a>
+      <a href="/profile/edit" class="btn btn-outline-primary my-2 d-block">edit profile</a>
     </div>
 
     <div class="col-md-7 px-2 profile-reviews">

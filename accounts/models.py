@@ -23,7 +23,7 @@ class UserProfile(models.Model):
     slug = models.SlugField(null=True, unique=True)
     phone = models.CharField(max_length=200, null=True, blank=True)
     about_me = models.TextField(default="random information about me", null=True, blank=True)
-    profile_pic = models.ImageField(default="person-circle.svg", null=True, blank=True)
+    profile_pic = models.ImageField(upload_to='profile-pics/', default="person-circle.svg", null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     # overwrite save method

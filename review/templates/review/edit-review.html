@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+
+  <div class="content-box col-md-9 mx-auto p-4">
+    <h5>Edit review</h5>
+    
+    <form class="p-3" action="" method='post'>
+      {% csrf_token %}
+  
+      <label for="product">Product:</label>
+      <p>{{review.product}}</p>
+
+      <label for="rating">Rating:</label>
+      <input type="number" name="rating" id="rating" value={{review.rating}} min='0' max='5'>
+      
+      <label for="review">Review:</label>
+      <textarea name="review" id="review" cols="60" rows="6">{{review.review}}</textarea>
+
+      <button class="btn btn-outline-primary mt-2">update</button>
+      
+    </form>
+  </div>
+
+{% endblock content %}
