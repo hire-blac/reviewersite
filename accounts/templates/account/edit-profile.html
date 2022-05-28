@@ -6,14 +6,27 @@
   <a href="/profile" class="btn text-primary">Back to profile</a>
   <div>
 
-    <div class="profile-pic">
-      <img src="{{profile.profile_pic.url}}" alt="">
-    </div>
-    <div class="col-md-8 m-auto">
-      <form class="form-control p-4" action="" method="post" enctype="multipart/form-data">
+    <div class="content-box col-md-8 m-auto">
+      <div class="profile-pic">
+        <img src="{{profile.profile_pic.url}}" alt="">
+      </div>
+      
+      <form class="p-4" action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-    
-          {{form.as_p}}
+          <div class="row">
+            <div class="col-md-6">
+              <label for="id_first_name">First name:</label>
+              {{form.first_name}}
+            </div>
+            <div class="col-md-6">
+              <label for="id_last_name">Last name:</label>
+              {{form.last_name}}
+            </div>
+          </div>
+          <div class="row my-4 px-3">
+            <label for="id_about_me">About me:</label>
+            {{form.about_me}}
+          </div>
           <a class="nav-link p-0 d-inline-block" href="/accounts/password/change">Change Password</a>
           <button class="btn btn-primary my-4 d-block" type="submit">Update</button>
     

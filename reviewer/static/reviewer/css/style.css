@@ -145,15 +145,14 @@ label {
   display: block;
 }
 input[type="text"] {
+  padding: 5px;
+  border-radius: 3px;
+}
+/* input[type="text"]:focus-within {
   border: solid 1.3px #0275d8;
   padding: 5px;
   border-radius: 5px;
-}
-input[type="text"]:focus-within {
-  border: solid 1.3px #0275d8;
-  padding: 5px;
-  border-radius: 5px;
-}
+} */
 
 /* Profile Styles */
 .profile-card {
