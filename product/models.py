@@ -27,7 +27,6 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='Category', verbose_name='Select a Category')
     name = models.CharField(max_length=200, verbose_name='Name')
     slug = models.SlugField(null=True, unique=True)
-    image = models.ImageField(upload_to='products/',default="placeholder-image.jpg", null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -40,6 +39,22 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('product_details', kwargs={'slug': self.slug})
+
+
+class ProductImage(models.Model):
+    review = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_image")
+    slug = models.SlugField(unique=True)
+    product_image = models.ImageField(upload_to='products/')
+
+    # overwrite save method
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = unique_slug_generator(self, self.review)
+        return super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('product_image', kwargs={'slug': self.slug})
+
 
     
 class ProductAttribute(models.Model):

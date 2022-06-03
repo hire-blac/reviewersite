@@ -13,9 +13,6 @@ class Review(models.Model):
     product = models.ForeignKey(Product, null=True, on_delete=models.CASCADE)
     rating = models.IntegerField()
     review = models.TextField()
-    review_image1 = models.ImageField(upload_to='review-images/', null=True, blank=True)
-    review_image2 = models.ImageField(upload_to='review-images/', null=True, blank=True)
-    review_image3 = models.ImageField(upload_to='review-images/', null=True, blank=True)
     slug = models.SlugField(null=True, unique=True)
     upvotes = models.ManyToManyField(User, default=None, blank=True, related_name='upvote')
     downvotes = models.ManyToManyField(User, default=None, blank=True, related_name='downvote')
@@ -41,6 +38,23 @@ class Review(models.Model):
     
     def get_absolute_url(self):
         return reverse('review_details', kwargs={'slug1': self.product.slug, 'slug': self.slug})
+
+
+class ReviewImage(models.Model):
+    review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="review_image")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user", null=True)
+    slug = models.SlugField(unique=True)
+    review_image = models.ImageField(upload_to='review-images/')
+
+    # overwrite save method
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = unique_slug_generator(self, self.review.review)
+        return super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('review_image', kwargs={'slug': self.slug})
+
 
 VOTE_CHOICES = {
     ('Upvote', 'Upvote'),

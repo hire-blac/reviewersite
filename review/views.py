@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from . forms import CreateNewReview, NewComment, NewReply
-from . models import Comment, Reply, Review, Vote
+from . models import Comment, Reply, Review, ReviewImage, Vote
 from product.models import Product
 
 
@@ -102,7 +102,8 @@ def downvote(response):
 @login_required(login_url='/accounts/login/')
 def new_review(response):
     if response.method == "POST":
-        form = CreateNewReview(response.POST)
+        form = CreateNewReview(response.POST, response.FILES)
+        print(response.FILES.getlist('image_uploads'))
 
         if form.is_valid():
             rev = form.cleaned_data
@@ -116,6 +117,17 @@ def new_review(response):
                 rating=rev['rating'],
                 review=rev['review'])
             review.save()
+
+            # loop through image files and save review images
+            for f in form.files.getlist('image_uploads'):
+                rev_image = ReviewImage(
+                    review=review,
+                    user=response.user,
+                    review_image=f
+                )
+                rev_image.save()
+                review.review_image.add(rev_image)
+
             response.user.review.add(review)
 
             return HttpResponseRedirect(product.get_absolute_url())

@@ -6,6 +6,7 @@ const product_input_div = $('#form-input-replacable-content')
 const prodAttribEndpoint = "/product/categories/";
 const catAttributes = $(".attribs");
 
+
 // search for product
 function search(element) {
   const search_input = element.id

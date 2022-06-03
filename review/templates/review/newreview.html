@@ -7,13 +7,22 @@
   <div class="content-box col-md-9 border shadow-sm rounded-3 bg-white mx-auto p-4">
     <h5>Write a review</h5>
     
-    <form class="p-3" action="" method='post'>
+    <form class="p-3" method='post' enctype="multipart/form-data">
       {% csrf_token %}
   
       <label for="product">Product:</label>
       {% include 'product/prod-srch.html' %}
       {{form.as_p}}
-      
+      <div>
+        <div>
+          <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
+          <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple max-size='50'>
+        </div>
+        <div class="preview">
+          <p>No files currently selected for upload</p>
+        </div>
+      <div>
+
       <button class="btn btn-outline-primary">post</button>
       
     </form>

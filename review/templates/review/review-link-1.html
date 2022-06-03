@@ -10,19 +10,9 @@
   </div>
 
   <div class="ms-4 me-2 review">
+    {% load my_filters %}
 
-    <div class="my-2">
-  
-      {% load my_filters %}
-  
-      {% for i in review.rating|stars %}
-        <i class="bi bi-star-fill text-warning"></i>
-      {% endfor %}
-    </div>
-    
-    <p class="review-body">
-      <a class="text-dark text-decoration-none" href="/review/{{review.product.slug}}/{{review.slug}}">{{review}}</a>
-    </p>
+    {% include 'review/partials/review-body.html' %}
   
     <div class="vote d-flex justify-content-between align-items-center">
       

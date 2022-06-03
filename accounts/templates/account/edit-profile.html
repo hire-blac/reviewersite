@@ -3,7 +3,7 @@
 
 {% block content %}
 
-  <a href="/profile" class="btn text-primary">Back to profile</a>
+  <a href="/profile" class="btn btn-outline-primary">Back to profile</a>
   <div>
 
     <div class="content-box col-md-8 m-auto">
@@ -13,6 +13,17 @@
       
       <form class="p-4" action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
+
+          <div>
+            <div class="preview">
+              <p>No file selected for upload</p>
+            </div>
+            <div>
+              <label for="image_uploads">Change Profile Photo</label>
+              <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png">
+            </div>
+          <div>
+
           <div class="row">
             <div class="col-md-6">
               <label for="id_first_name">First name:</label>

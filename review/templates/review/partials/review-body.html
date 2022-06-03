@@ -1,0 +1,24 @@
+<div class="my-1">
+
+  {% load my_filters %}
+
+  {% for i in review.rating|stars %}
+    <i class="bi bi-star-fill text-warning"></i>
+  {% endfor %}
+</div>
+
+<p class="review-body">
+  <a class="text-dark text-decoration-none" href="/review/{{review.product.slug}}/{{review.slug}}">{{review}}</a>
+</p>
+
+{% if review.review_image.all.count > 0 %}
+  <div class="review-images">
+    {% for img in review.review_image.all %}
+      <div class="rev-image">
+        <a href="">
+          <img src="{{img.review_image.url}}" alt="">
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
