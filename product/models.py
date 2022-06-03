@@ -42,14 +42,17 @@ class Product(models.Model):
 
 
 class ProductImage(models.Model):
-    review = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_image")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_image")
     slug = models.SlugField(unique=True)
     product_image = models.ImageField(upload_to='products/')
+
+    def __str__(self):
+        return self.slug
 
     # overwrite save method
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = unique_slug_generator(self, self.review)
+            self.slug = unique_slug_generator(self, self.product.name)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):

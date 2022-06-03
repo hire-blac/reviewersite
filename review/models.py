@@ -46,6 +46,9 @@ class ReviewImage(models.Model):
     slug = models.SlugField(unique=True)
     review_image = models.ImageField(upload_to='review-images/')
 
+    def __str__(self):
+        return self.slug
+
     # overwrite save method
     def save(self, *args, **kwargs):
         if not self.slug:
