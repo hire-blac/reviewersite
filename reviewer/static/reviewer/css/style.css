@@ -178,6 +178,7 @@ a.land-butt {
 }
 .rev-image {
   display: inline-block;
+  margin: 5px;
   /* border: solid 1px red; */
 }
 .rev-image img {
