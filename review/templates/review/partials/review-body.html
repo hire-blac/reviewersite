@@ -15,10 +15,11 @@
   <div class="review-images">
     {% for img in review.review_image.all %}
       <div class="rev-image">
-        <a href="">
-          <img src="{{img.review_image.url}}" alt="">
-        </a>
+        <!-- Image link to trigger modal -->
+        <img src="{{img.review_image.url}}" alt="" data-bs-toggle="modal" data-bs-target="#imageModal">
       </div>
+
     {% endfor %}
   </div>
+
 {% endif %}

@@ -5,8 +5,11 @@
     <div class="review-user-image">
       <img src="{{review.user.userprofile.profile_pic.url}}" alt="">
     </div>
-    <small >
+    <small class="d-flex justify-content-between w-100">
+      <div class="written-by">
         Written by <a class="text-decoration-none" href="/profile/{{review.user.userprofile.slug}}">{{review.user}}</a>
+      </div>
+      <div class="date">{{review.created.time|time:"h:ia"}} {{review.created.date}}</div>
     </small>
   </div>
   

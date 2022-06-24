@@ -84,6 +84,16 @@
             hidden=true  
           >
           {{form.as_p}}
+
+          <div>
+            <div>
+              <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
+              <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple max-size='50'>
+            </div>
+            <div class="preview">
+              <p>No files currently selected for upload</p>
+            </div>
+          <div>
       
           <button class="btn btn-primary">post</button>
           
