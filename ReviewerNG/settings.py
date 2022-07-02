@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     # 3rd party
     'allauth',
     'allauth.account',
+    'storages',
     # 'allauth.socialaccount',
 
     'crispy_forms',
@@ -168,6 +169,8 @@ DATABASES['default'].update(db_from_env)
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'reviewer/static/images')
 
