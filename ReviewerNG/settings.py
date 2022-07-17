@@ -34,20 +34,16 @@ DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = ['reviewersite.herokuapp.com', '0.0.0.0', '127.0.0.1']
 
-PRODUCTION_ENV = os.environ['PRODUCTION_ENV']
-print(PRODUCTION_ENV)
-
-if PRODUCTION_ENV:
-    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
-    AWS_DEFAULT_ACL = None
-    AWS_S3_SIGNATURE_VERSION = 's3v4'
-    AWS_S3_SFILE_OVERWRITE = False
-    # AWS_S3_REGION_NAME = os.environ['SECRET_KEY']
-    # AWS_S3_ENDPOINT_URL = f'https://reviewerbucket.s3.amazonaws.com'
-    # AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-    DEFAULT_FILE_STORAGE = 'ReviewerNG.storage_backends.MediaStorage'
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+AWS_DEFAULT_ACL = None
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_S3_SFILE_OVERWRITE = False
+# AWS_S3_REGION_NAME = os.environ['SECRET_KEY']
+# AWS_S3_ENDPOINT_URL = f'https://reviewerbucket.s3.amazonaws.com'
+# AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+DEFAULT_FILE_STORAGE = 'ReviewerNG.storage_backends.MediaStorage'
 
 
 # Application definition
