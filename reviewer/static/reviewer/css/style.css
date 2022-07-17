@@ -148,7 +148,7 @@ a.land-butt {
   display: flex;
   flex-direction: row;
   justify-content: left;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 .preview ol li {
   display: inline-block;

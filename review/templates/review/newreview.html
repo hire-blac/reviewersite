@@ -15,7 +15,9 @@
       {{form.as_p}}
       <div>
         <div>
-          <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
+          <label for="image_uploads">
+            <img src="/static/images/Icons/file-image-plus.png" alt=""> (PNG, JPG)(4 Max)
+          </label>
           <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple max-size='50'>
         </div>
         <div class="preview">
@@ -23,7 +25,7 @@
         </div>
       <div>
 
-      <button class="btn btn-outline-primary">post</button>
+      <button class="btn btn-outline-primary new-review-button">post</button>
       
     </form>
   </div>

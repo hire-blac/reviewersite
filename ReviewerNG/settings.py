@@ -8,9 +8,11 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
+
 """
 
 from pathlib import Path
+from decouple import config
 from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
@@ -32,6 +34,21 @@ DEBUG = False
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = ['reviewersite.herokuapp.com', '0.0.0.0', '127.0.0.1']
+
+PRODUCTION_ENV = os.environ['PRODUCTION_ENV']
+
+if PRODUCTION_ENV:
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    AWS_DEFAULT_ACL = None
+    AWS_S3_SIGNATURE_VERSION = 's3v4'
+    AWS_S3_SFILE_OVERWRITE = False
+    # AWS_S3_REGION_NAME = os.environ['SECRET_KEY']
+    # AWS_S3_ENDPOINT_URL = f'https://reviewerbucket.s3.amazonaws.com'
+    # AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+
+    DEFAULT_FILE_STORAGE = 'ReviewerNG.storage_backends.MediaStorage'
 
 
 # Application definition
@@ -142,17 +159,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
-
-# The absolute path to the directory where collectstatic will collect static files for deployment.
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# The URL to use when referring to static files (where they will be served from)
-STATIC_URL = '/static/'
-MEDIA_URL = '/images/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -166,17 +172,27 @@ import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.1/howto/static-files/
+
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# The absolute path to the directory where collectstatic will collect static files for deployment.
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'reviewer/static/images')
+# The URL to use when referring to static files (where they will be served from)
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'reviewer/static')
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'reviewer/static/images')
+MEDIA_URL = '/images/'
+
 
 # DJANGO ALL-AUTH
 

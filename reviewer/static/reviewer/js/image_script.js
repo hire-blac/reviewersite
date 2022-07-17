@@ -15,9 +15,11 @@ const fileTypes = [
 // image input
 const image_input = document.querySelector('input[type="file"]');
 const image_preview = document.querySelector('.preview');
+const post_review = document.querySelector(".new-review-button")
 
 // hide file input
 image_input.style.opacity = 0;
+
 
 // add event listener
 image_input.addEventListener('change', updateImageDisplay);
@@ -34,28 +36,33 @@ function updateImageDisplay() {
     para.textContent = 'No files currently selected for upload';
     image_preview.appendChild(para);
   } else {
-    const list = document.createElement('ol');
-    image_preview.appendChild(list);
+    if(curFiles.length > 4) {
+      alert("Maximum number of files exceeded! Upload a maximum of 4 images");
+    } else {
 
-    for(const file of curFiles) {
-      const listItem = document.createElement('li');
-      const imageBox = document.createElement('div');
-      const para = document.createElement('p');
-      if(validFileType(file)) {
-        para.textContent = `File name ${file.name}, file size ${returnFileSize(file.size)}.`;
-        const image = document.createElement('img');
-        image.src = URL.createObjectURL(file);
-
-        imageBox.className = "image-preview-box";
-        imageBox.appendChild(image);
-        imageBox.appendChild(para);
-        listItem.appendChild(imageBox);
-      } else {
-        para.textContent = `File name ${file.name}: Not a valid file type. Update your selection.`;
-        listItem.appendChild(para);
+      const list = document.createElement('ol');
+      image_preview.appendChild(list);
+  
+      for(const file of curFiles) {
+        const listItem = document.createElement('li');
+        const imageBox = document.createElement('div');
+        const para = document.createElement('p');
+        if(validFileType(file)) {
+          para.textContent = `file size ${returnFileSize(file.size)}.`;
+          const image = document.createElement('img');
+          image.src = URL.createObjectURL(file);
+  
+          imageBox.className = "image-preview-box";
+          imageBox.appendChild(image);
+          imageBox.appendChild(para);
+          listItem.appendChild(imageBox);
+        } else {
+          para.textContent = `File name ${file.name}: Not a valid file type. Update your selection.`;
+          listItem.appendChild(para);
+        }
+  
+        list.appendChild(listItem);
       }
-
-      list.appendChild(listItem);
     }
   }
 }
