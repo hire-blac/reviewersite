@@ -35,8 +35,9 @@ DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 ALLOWED_HOSTS = ['reviewersite.herokuapp.com', '0.0.0.0', '127.0.0.1']
 
 PRODUCTION_ENV = os.environ['PRODUCTION_ENV']
+print(PRODUCTION_ENV)
 
-if PRODUCTION_ENV:
+if PRODUCTION_ENV == "True":
     AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
     AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
     AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
