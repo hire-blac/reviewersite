@@ -11,7 +11,7 @@ const fileTypes = [
   "image/webp",
   "image/x-icon"
 ];
-
+//
 // image input
 const image_input = document.querySelector('input[type="file"]');
 const image_preview = document.querySelector('.preview');
@@ -34,7 +34,7 @@ function updateImageDisplay() {
   if(curFiles.length === 0) {
     const para = document.createElement('p');
     para.textContent = 'No files currently selected for upload';
-    image_preview.appendChild(para);
+    // image_preview.appendChild(para);
   } else {
     if(curFiles.length > 4) {
       alert("Maximum number of files exceeded! Upload a maximum of 4 images");
@@ -54,11 +54,11 @@ function updateImageDisplay() {
   
           imageBox.className = "image-preview-box";
           imageBox.appendChild(image);
-          imageBox.appendChild(para);
+          // imageBox.appendChild(para);
           listItem.appendChild(imageBox);
         } else {
           para.textContent = `File name ${file.name}: Not a valid file type. Update your selection.`;
-          listItem.appendChild(para);
+          // listItem.appendChild(para);
         }
   
         list.appendChild(listItem);

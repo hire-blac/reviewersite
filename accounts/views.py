@@ -41,6 +41,7 @@ def edit_profile(response):
             form.save()
             return redirect('/profile')
             
+            
     form = EditProfileForm(instance=profile)
     context = {
         'form': form,

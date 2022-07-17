@@ -211,8 +211,8 @@ input[type="text"] {
   height: fit-content;
 }
 .profile-pic {
-  width: 80px;
-  height: 80px;
+  width: 200px;
+  height: auto;
   margin: auto;
 }
 .profile-pic img {
@@ -220,6 +220,8 @@ input[type="text"] {
   height: 100%;
   border-radius: 50%;
 }
+
+
 .followings img {
   display: block;
   width: 30px;

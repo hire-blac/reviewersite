@@ -7,7 +7,7 @@
   <div>
 
     <div class="content-box col-md-8 m-auto">
-      <div class="profile-pic">
+      <div class="profile-pic preview">
         <img src="{{profile.profile_pic.url}}" alt="">
       </div>
       
@@ -15,14 +15,9 @@
         {% csrf_token %}
 
           <div>
-            <div class="profile-pic-preview">
-              <p>No file selected for upload</p>
-            </div>
-            <div>
-              <label for="image_uploads">Change Profile Photo</label>
-              <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png">
-            </div>
-          <div>
+            <label for="image_uploads" class="text-center">Change Profile Picture</label>
+            <input type="file" id="image_uploads" name="profile_pic" accept=".jpg, .jpeg, .png">
+          </div>
 
           <div class="row">
             <div class="col-md-6">
@@ -39,7 +34,7 @@
             {{form.about_me}}
           </div>
           <a class="nav-link p-0 d-inline-block" href="/accounts/password/change">Change Password</a>
-          <button class="btn btn-primary my-4 d-block" type="submit">Update</button>
+          <button class="btn btn-primary my-4 d-block" type="submit">Save</button>
     
       </form>
     </div>
